@@ -170,7 +170,7 @@ body{font-size:16px}
 .readable-body{min-width:0}.readable-title{font-size:19px;font-weight:850;line-height:1.2;letter-spacing:-.035em}.readable-sub{margin-top:5px;font-size:12px;color:rgba(46,45,45,.72);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.readable-meta{margin-top:5px;font-size:11px;color:var(--muted);font-weight:700}.readable-arrow{font-size:28px;line-height:1;color:rgba(46,45,45,.58);text-align:center}
 .filters{padding-top:8px}.filter{min-height:42px;font-family:"Pretendard",sans-serif;font-size:12px;letter-spacing:-.01em;text-transform:none}
 .more-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.more-card{position:relative;min-height:150px;text-align:left;padding:18px 16px;border-radius:28px;box-shadow:var(--shadow);color:var(--ink)}.more-title{margin-top:0;font-family:var(--english);font-size:20px;font-weight:900;line-height:1.05;letter-spacing:-.03em}.more-sub{margin-top:8px;padding-right:22px;font-size:12px;line-height:1.45;color:rgba(46,45,45,.72)}.more-arrow{position:absolute;right:16px;bottom:14px;width:28px;height:28px;border-radius:50%;background:rgba(248,247,242,.62);display:grid;place-items:center;font-size:16px;font-weight:900}
+.more-card{position:relative;min-height:116px;text-align:left;padding:14px 15px 13px;border-radius:26px;box-shadow:var(--shadow);color:var(--ink);display:flex;flex-direction:column;justify-content:flex-start}.more-title{margin:0;font-family:var(--english);font-size:19px;font-weight:900;line-height:1.02;letter-spacing:-.03em}.more-sub{margin-top:6px;padding-right:34px;font-size:11.5px;line-height:1.4;color:rgba(46,45,45,.72)}.more-arrow{position:absolute;right:14px;bottom:12px;width:27px;height:27px;border-radius:50%;background:rgba(248,247,242,.62);display:grid;place-items:center;font-size:15px;font-weight:900}
 .quick-btn{min-height:108px}.quick-btn strong{font-family:var(--english);font-size:21px;letter-spacing:-.04em}.quick-btn .mini-title{font-family:var(--english)}
 .detail-card .name{font-family:"Pretendard",-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;letter-spacing:-.045em;line-height:1;font-size:clamp(34px,10vw,58px)}
 .detail-card .cn{line-height:1.5}
@@ -195,6 +195,79 @@ body{font-size:16px}
 .catalog-card.visited .catalog-chip:before{content:'✓ ';}
 
 @media(max-width:560px){.more-grid{grid-template-columns:1fr 1fr}.weather-grid{grid-template-columns:1fr 1fr}.emergency-grid{grid-template-columns:repeat(3,1fr)}.section-sub{max-width:36ch}.app{padding-left:16px;padding-right:16px}.readable-row{padding:11px}.readable-title{font-size:18px}.readable-sub{font-size:11.5px}}
+
+
+/* v17 — CHARCOAL foreground contrast rules
+   Any component using the charcoal token (legacy .color-red / .color-black)
+   must use light text throughout. */
+.catalog-card.color-red,
+.catalog-card.color-black{
+  color:var(--grey);
+}
+.catalog-card.color-red .catalog-name,
+.catalog-card.color-black .catalog-name,
+.catalog-card.color-red .catalog-cn,
+.catalog-card.color-black .catalog-cn,
+.catalog-card.color-red .catalog-en,
+.catalog-card.color-black .catalog-en,
+.catalog-card.color-red .catalog-meta,
+.catalog-card.color-black .catalog-meta{
+  color:var(--grey);
+}
+.catalog-card.color-red .catalog-chip,
+.catalog-card.color-black .catalog-chip{
+  background:rgba(248,247,242,.16);
+  color:var(--grey);
+}
+.catalog-card.color-red .catalog-arrow,
+.catalog-card.color-black .catalog-arrow{
+  background:var(--grey);
+  color:var(--charcoal);
+}
+
+.more-card.color-red,
+.more-card.color-black{
+  color:var(--grey);
+}
+.more-card.color-red .more-title,
+.more-card.color-black .more-title,
+.more-card.color-red .more-sub,
+.more-card.color-black .more-sub{
+  color:var(--grey);
+}
+.more-card.color-red .more-sub,
+.more-card.color-black .more-sub{
+  opacity:.78;
+}
+.more-card.color-red .more-arrow,
+.more-card.color-black .more-arrow{
+  background:var(--grey);
+  color:var(--charcoal);
+}
+
+/* Keep the same contrast behavior if charcoal cards are reused in other lists. */
+.booking.color-red,
+.booking.color-black,
+.maybe-card.color-red,
+.maybe-card.color-black,
+.quick-btn.color-red,
+.quick-btn.color-black{
+  color:var(--grey);
+}
+.booking.color-red .type,
+.booking.color-red .title,
+.booking.color-red .meta,
+.booking.color-black .type,
+.booking.color-black .title,
+.booking.color-black .meta,
+.maybe-card.color-red .type,
+.maybe-card.color-red .title,
+.maybe-card.color-red .sub,
+.maybe-card.color-black .type,
+.maybe-card.color-black .title,
+.maybe-card.color-black .sub{
+  color:var(--grey);
+}
 
 </style>
 </head>
@@ -222,14 +295,139 @@ const MASKS=['mask-a','mask-b','mask-c'];
 const SPOT_KO={jiefangbei:'해방비',hongyadong:'홍야동',bayi:'바이이 하오츠제',tmpgov:'대한민국 임시정부 청사',tiansheng:'천생삼교',fairymountain:'선녀산',longshuixia:'용수협지봉',guanyinqiao:'관음교',jiujie:'구가',luohansi:'나한사',ciqikou:'자기구고진',liziba:'리즈바역',ering:'어링얼창',shibati:'십팔제',xiahao:'샤하오리'};
 const FOOD_KO={milktea:'밀크티',yangrou:'우롱 양고기',kaoyu:'카오위',xiaomian:'충칭 샤오몐',xiaolongxia:'마라롱샤',dimsum:'딤섬'};
 const MORE_ITEMS=[
-  {id:'book',icon:'booking',title:'BOOKINGS',sub:'항공·기차·숙소·입장권'},
-  {id:'money',icon:'wallet',title:'MONEY',sub:'예산과 커플 공동지출'},
-  {id:'talk',icon:'chat',title:'TALK',sub:'중국어 문장 복사'},
-  {id:'check',icon:'check',title:'CHECK',sub:'예약·결제·준비물'},
-  {id:'maybe',icon:'star',title:'MAYBE',sub:'시간 남으면 갈 곳'},
-  {id:'weather',icon:'cloud',title:'WEATHER',sub:'충칭·우롱 날씨와 운영 확인'},
-  {id:'emergency',icon:'emergency',title:'EMERGENCY',sub:'긴급전화와 도움 요청 문장'}
+  {id:'book',title:'BOOKINGS',sub:'항공·기차·숙소·입장권'},
+  {id:'money',title:'MONEY',sub:'예산과 커플 공동지출'},
+  {id:'talk',title:'TALK',sub:'중국어 문장 복사'},
+  {id:'check',title:'CHECK',sub:'예약·결제·준비물'},
+  {id:'maybe',title:'MAYBE',sub:'시간 남으면 갈 곳'},
+  {id:'weather',title:'WEATHER',sub:'충칭·우롱 날씨와 운영 확인'},
+  {id:'emergency',title:'EMERGENCY',sub:'긴급전화와 도움 요청 문장'}
 ];
+const DAYS=[
+  {id:1,date:'08.25',dow:'TUE',name:'도착일',place:'충칭 · Fandiao Meiju',sleep:'Fandiao Meiju',food:'밀크티 · 야시장',events:[
+    ['18:05','충칭 도착','입국 후 지하철 또는 택시 이동'],
+    ['19:30','숙소 체크인','지에팡베이 인근'],
+    ['20:10','해방비','야경 · 산책','spot','jiefangbei'],
+    ['20:40','밀크티 한 잔','첫날 가볍게','food','milktea'],
+    ['21:10','홍야동','야경 보기','spot','hongyadong'],
+    ['22:10','바이이 하오츠제','야시장 간식','spot','bayi']
+  ]},
+  {id:2,date:'08.26',dow:'WED',name:'우롱 1일차',place:'충칭 → 우롱',sleep:'우롱 숙소',food:'우롱 양고기',events:[
+    ['09:00','임정청사','오전 한 곳만 보기','spot','tmpgov'],
+    ['11:46','충칭동 → 우롱남','고속철 이동'],
+    ['14:00','천생삼교','오후 메인 코스','spot','tiansheng'],
+    ['18:30','우롱 양고기','저녁 식사','food','yangrou']
+  ]},
+  {id:3,date:'08.27',dow:'THU',name:'우롱 → 충칭',place:'우롱 → 충칭',sleep:'Fandiao Apartment',food:'카오위',events:[
+    ['08:00','선녀산','아침 산책','spot','fairymountain'],
+    ['11:00','용수협지봉','협곡 코스','spot','longshuixia'],
+    ['17:03','우롱남 → 충칭동','고속철 복귀'],
+    ['19:30','관음교','저녁 상권','spot','guanyinqiao'],
+    ['20:30','카오위','충칭 복귀 첫 저녁','food','kaoyu'],
+    ['22:00','구가(九街)','밤거리 옵션','spot','jiujie']
+  ]},
+  {id:4,date:'08.28',dow:'FRI',name:'충칭 시내',place:'충칭 시내 풀데이',sleep:'Fandiao Apartment',food:'딤섬 · 샤오몐 · 마라롱샤',events:[
+    ['08:40','나한사','아침 방문','spot','luohansi'],
+    ['10:00','자기구고진','간식·기념품','spot','ciqikou'],
+    ['12:00','리즈바역','경전철 사진','spot','liziba'],
+    ['12:40','어링얼창','카페 쉬기','spot','ering'],
+    ['13:20','샤오몐','가볍게 점심','food','xiaomian'],
+    ['17:00','십팔제','구도심 산책','spot','shibati'],
+    ['18:30','샤하오리','해질 무렵 산책','spot','xiahao'],
+    ['20:30','마라롱샤','야식 타임','food','xiaolongxia']
+  ]},
+  {id:5,date:'08.29',dow:'SAT',name:'귀국일',place:'충칭 → 지난 → 인천',sleep:'귀가',food:'산둥 한 끼',events:[
+    ['08:30','샤오몐 또는 간단 조식','출국 전 마지막 식사','food','xiaomian'],
+    ['10:10','공항 이동','충칭 강북공항'],
+    ['13:30','충칭 → 지난','환승'],
+    ['16:20','산둥 음식 · 카페','지난 공항 활용'],
+    ['20:10','지난 → 인천','22:40 도착']
+  ]}
+];
+const SPOTS={
+  jiefangbei:{kind:'City',name:'Jiefangbei',cn:'解放碑',area:'충칭 시내',date:'08.25',duration:'40–60 min',search:'解放碑步行街',map:'解放碑步行街 重庆',summary:'충칭 중심 상권. 첫날 밤 분위기를 보기 가장 좋고, 야시장·밀크티·쇼핑을 붙이기 쉽습니다.',highlights:['보행자 거리 산책','네온사인과 야경','밀크티·간식 동선 연결'],tips:['홍야동과 같은 날 묶기 좋음','밤 8시 이후 분위기가 더 좋음'],photo:'https://loremflickr.com/960/720/chongqing,city?lock=101'},
+  hongyadong:{kind:'Night View',name:'Hongyadong',cn:'洪崖洞',area:'충칭 시내',date:'08.25',duration:'45–60 min',search:'洪崖洞',map:'洪崖洞 重庆',summary:'충칭 대표 야경 스팟. 층층이 쌓인 건물과 강가 조명이 포인트입니다.',highlights:['강변 야경','건물 조명','포토 스폿'],tips:['해방비에서 같이 보기 좋음','사람 많아도 외곽에서 보는 뷰가 예쁨'],photo:'https://loremflickr.com/960/720/hongyadong,chongqing?lock=102'},
+  bayi:{kind:'Market',name:'Bayi Street',cn:'八一好吃街',area:'충칭 시내',date:'08.25',duration:'30–50 min',search:'八一好吃街',map:'八一好吃街 重庆',summary:'충칭 대표 먹거리 거리. 여러 간식을 나눠먹기 좋습니다.',highlights:['산라펀·꼬치·빙펀','짧게 둘러보기 좋음'],tips:['메인 저녁 후 2차 간식 장소로 적합'],photo:'https://loremflickr.com/960/720/streetfood,china?lock=103'},
+  tmpgov:{kind:'Museum',name:'KPG Building',cn:'大韩民国临时政府旧址陈列馆',area:'충칭 시내',date:'08.26',duration:'40–60 min',search:'大韩民国临时政府旧址陈列馆',map:'大韩民国临时政府旧址陈列馆 重庆',summary:'대한민국 임시정부 청사 유적 전시관. 오전 한 곳으로 보기 좋습니다.',highlights:['한국 관련 역사 전시','비교적 짧게 관람 가능'],tips:['8/26 오전에 방문 후 역 이동 추천'],photo:'https://loremflickr.com/960/720/museum,history?lock=104'},
+  tiansheng:{kind:'Nature',name:'Three Bridges',cn:'天生三桥',area:'우롱',date:'08.26',duration:'2–3 hr',search:'天生三桥 武隆',map:'天生三桥 武隆',summary:'우롱 대표 명소. 거대한 천연 석교와 영화 같은 풍경이 특징입니다.',highlights:['거대한 석교 지형','우롱 대표 포인트','걷는 구간이 많음'],tips:['오후 메인 일정으로 배정','운동화 필수'],photo:'https://loremflickr.com/960/720/canyon,bridge,nature?lock=105'},
+  fairymountain:{kind:'Nature',name:'Fairy Mountain',cn:'仙女山',area:'우롱',date:'08.27',duration:'1.5–2 hr',search:'仙女山 国家森林公园',map:'仙女山 国家森林公园',summary:'넓은 초원과 삼림이 있는 우롱의 고원 지대. 아침 산책 코스로 적당합니다.',highlights:['시원한 고원 분위기','초원·삼림 풍경'],tips:['아침 일찍 가면 비교적 쾌적함'],photo:'https://loremflickr.com/960/720/mountain,meadow?lock=106'},
+  longshuixia:{kind:'Nature',name:'Longshuixia Rift',cn:'龙水峡地缝',area:'우롱',date:'08.27',duration:'1.5–2 hr',search:'龙水峡地缝 武隆',map:'龙水峡地缝 武隆',summary:'깊은 협곡 사이를 걷는 코스. 계단과 젖은 바닥이 있어 미끄럼 주의가 필요합니다.',highlights:['깊은 협곡 풍경','우롱 대표 협곡 코스'],tips:['선녀산 후 방문 추천','우비나 미끄럼 주의'],photo:'https://loremflickr.com/960/720/canyon,waterfall?lock=107'},
+  guanyinqiao:{kind:'District',name:'Guanyinqiao',cn:'观音桥',area:'충칭 시내',date:'08.27',duration:'2–3 hr',search:'观音桥步行街',map:'观音桥步行街 重庆',summary:'젊은 상권과 쇼핑, 식당이 모인 번화가. 카오위 저녁과 잘 어울립니다.',highlights:['쇼핑몰·상권','야간 분위기'],tips:['북창문창거리와 함께 보기 좋음'],photo:'https://loremflickr.com/960/720/shopping,city,night?lock=108'},
+  jiujie:{kind:'Night Area',name:'Jiujie',cn:'九街',area:'충칭 시내',date:'08.27',duration:'1–2 hr',search:'九街 重庆',map:'九街 重庆',summary:'관음교 권역의 밤거리. 늦게까지 활기가 남는 편입니다.',highlights:['심야 상권','술집·야식'],tips:['체력 남으면 옵션으로 방문'],photo:'https://loremflickr.com/960/720/nightlife,street?lock=109'},
+  luohansi:{kind:'Temple',name:'Luohansi',cn:'罗汉寺',area:'충칭 시내',date:'08.28',duration:'30–45 min',search:'罗汉寺 重庆',map:'罗汉寺 重庆',summary:'도심 속 사찰. 아침에 비교적 조용하게 보기 좋습니다.',highlights:['짧게 보기 좋은 사찰','도심 속 분위기 전환'],tips:['이른 아침 방문 추천'],photo:'https://loremflickr.com/960/720/temple,china?lock=110'},
+  ciqikou:{kind:'Old Town',name:'Ciqikou',cn:'磁器口古镇',area:'충칭 시내',date:'08.28',duration:'1–1.5 hr',search:'磁器口古镇',map:'磁器口古镇 重庆',summary:'오래된 골목과 간식, 기념품 가게가 모여 있는 고진. 천마화 쇼핑에 좋습니다.',highlights:['기념품·간식 쇼핑','골목 산책'],tips:['너무 오래 있지 말고 핵심만 보기'],photo:'https://loremflickr.com/960/720/oldtown,china?lock=111'},
+  liziba:{kind:'Photo Spot',name:'Liziba',cn:'李子坝',area:'충칭 시내',date:'08.28',duration:'30–40 min',search:'李子坝观景平台',map:'李子坝观景平台 重庆',summary:'건물을 통과하는 경전철로 유명한 포토 스폿.',highlights:['모노레일 사진','짧게 보기 좋음'],tips:['맞은편 플랫폼에서 사진 찍기'],photo:'https://loremflickr.com/960/720/train,city?lock=112'},
+  ering:{kind:'Creative Park',name:'Eling No.2',cn:'鹅岭二厂',area:'충칭 시내',date:'08.28',duration:'1 hr',search:'鹅岭二厂',map:'鹅岭二厂 重庆',summary:'옛 공장을 개조한 문창공간. 카페 쉬기 좋고 사진 찍기 좋습니다.',highlights:['카페·소품샵','문창 감성'],tips:['리즈바와 함께 묶기 좋음'],photo:'https://loremflickr.com/960/720/cafe,creative,industrial?lock=113'},
+  shibati:{kind:'Old Street',name:'Shibati',cn:'十八梯',area:'충칭 시내',date:'08.28',duration:'45–60 min',search:'十八梯传统风貌区',map:'十八梯传统风貌区 重庆',summary:'충칭의 계단형 구도심 풍경을 보기 좋은 곳.',highlights:['계단 골목','야간 산책'],tips:['늦은 오후 방문 추천'],photo:'https://loremflickr.com/960/720/oldstreet,stairs?lock=114'},
+  xiahao:{kind:'Old Street',name:'Xiahaoli',cn:'下浩里',area:'충칭 시내',date:'08.28',duration:'1–1.5 hr',search:'下浩里老街',map:'下浩里老街 重庆',summary:'남안구의 오래된 산비탈 거리. 해질 무렵 분위기가 좋습니다.',highlights:['골목·계단 풍경','야경 전 산책'],tips:['룽먼하오와 이어보기 좋음'],photo:'https://loremflickr.com/960/720/oldstreet,night?lock=115'}
+};
+const FOODS={
+  milktea:{kind:'Drink',name:'Milk Tea',cn:'奶茶',date:'08.25',duration:'10 min',search:'奶茶 少糖 少冰',map:'奶茶 重庆',summary:'첫날 해방비에서 한 잔. 주문할 때는 당도와 얼음을 같이 말하면 편합니다.',order:['三分糖 = 30% 당도','少冰 = 얼음 적게','珍珠 = 펄 추가'],tips:['더우면 첫 잔으로 좋음'],photo:'https://loremflickr.com/960/720/milk-tea?lock=201'},
+  yangrou:{kind:'Dinner',name:'Wulong Lamb',cn:'碗碗羊肉 / 羊肉汤',date:'08.26',duration:'1 hr',search:'羊肉汤 武隆',map:'羊肉汤 武隆',summary:'우롱에서 먹는 지역식 저녁. 뜨끈하고 든든한 편입니다.',order:['양고기탕 또는 양고기 볶음','밥이나 면 추가 가능'],tips:['천생삼교 후 저녁으로 무난함'],photo:'https://loremflickr.com/960/720/lamb,soup?lock=202'},
+  kaoyu:{kind:'Dinner',name:'Kao Yu',cn:'烤鱼',date:'08.27',duration:'1–1.5 hr',search:'烤匠麻辣烤鱼 观音桥',map:'烤匠麻辣烤鱼 观音桥',summary:'생선을 구운 뒤 육수와 함께 내는 충칭식 카오위. 둘이 먹기 좋습니다.',order:['麻辣烤鱼 또는 豆花烤鱼','채소 추가 가능','맵기 微辣 가능'],tips:['관음교 저녁 메인 메뉴로 추천'],photo:'https://loremflickr.com/960/720/grilled-fish,food?lock=203'},
+  xiaomian:{kind:'Noodle',name:'Xiao Mian',cn:'重庆小面',date:'08.28 / 08.29',duration:'20–30 min',search:'重庆小面',map:'重庆小面 重庆',summary:'충칭식 매운 면. 점심이나 출국 전 간단한 식사로 좋습니다.',order:['기본 샤오몐','맵기 조절 가능'],tips:['땅콩·파 향이 강할 수 있음'],photo:'https://loremflickr.com/960/720/noodles,china?lock=204'},
+  xiaolongxia:{kind:'Late Night',name:'Mala Crayfish',cn:'麻辣小龙虾',date:'08.28',duration:'1–1.5 hr',search:'麻辣小龙虾 解放碑',map:'麻辣小龙虾 重庆',summary:'마라 양념 가재. 밤에 맥주와 함께 먹기 좋습니다.',order:['麻辣味 + 蒜蓉味 반반','장갑·물티슈 준비'],tips:['맵기 부담되면 蒜蓉味 섞기'],photo:'https://loremflickr.com/960/720/crayfish,food?lock=205'},
+  dimsum:{kind:'Brunch',name:'Dim Sum',cn:'点心 / 虾饺 / 烧卖',date:'옵션',duration:'45–60 min',search:'港式点心 解放碑',map:'港式点心 重庆',summary:'하가우, 샤오마이, 창펀을 가볍게 먹는 홍콩식 브런치 옵션.',order:['虾饺皇','烧卖','肠粉','流沙包'],tips:['오전 식사 옵션으로 좋음'],photo:'https://loremflickr.com/960/720/dim-sum?lock=206'}
+};
+const BOOKINGS=[
+  {type:'Flight',title:'ICN → TAO → CKG',color:'color-red',meta:['08.25 12:15–12:50 인천→칭다오','15:10–18:05 칭다오→충칭'],note:'칭다오 경유 · 위탁수하물 없음',code:'DAY 01'},
+  {type:'Train',title:'CKG East → Wulong South',color:'color-yellow',meta:['08.26 고속철 이동','11:46 출발 기준으로 계획'],note:'역명은 武隆南 확인',code:'DAY 02'},
+  {type:'Hotel',title:'Fandiao Meiju',color:'color-blue',meta:['08.25–08.26 1박','충칭 첫 숙소'],note:'지에팡베이 인근',code:'HOTEL 1'},
+  {type:'Hotel',title:'Wulong Stay',color:'color-lav',meta:['08.26–08.27 1박','우롱 숙소'],note:'천생삼교·선녀산 이동 고려',code:'HOTEL 2'},
+  {type:'Hotel',title:'Fandiao Apartment',color:'color-pink',meta:['08.27–08.29 2박','충칭 복귀 숙소'],note:'외국인 숙박등록 가능 여부 확인',code:'HOTEL 3'},
+  {type:'Ticket',title:'Wulong Scenic Tickets',color:'color-mint',meta:['천생삼교','용수협지봉','선녀산'],note:'공연 제외 버전',code:'TICKET'},
+  {type:'Flight',title:'CKG → TNA → ICN',color:'color-sand',meta:['08.29 13:30–15:45 충칭→지난','20:10–22:40 지난→인천'],note:'지난 공항 환승 4시간 25분',code:'DAY 05'}
+];
+const MAYBE=[
+  {type:'Spot',title:'북창문창거리',cn:'北仓文创街区',why:'관음교와 붙여 보기 좋은 카페·문창 구역',when:'8/27 밤'},
+  {type:'Spot',title:'쿠이싱러우',cn:'魁星楼',why:'해방비·홍야동 사이 짧게 끼우기 좋은 포인트',when:'8/25 밤'},
+  {type:'Spot',title:'룽먼하오 라오제',cn:'龙门浩老街',why:'샤하오리와 이어서 야경 보기 좋은 거리',when:'8/28 저녁'},
+  {type:'Food',title:'방공호 훠궈',cn:'防空洞火锅',why:'방공호 훠궈. 일정이 너무 빡빡하지 않으면 후보',when:'충칭 시내 여유 생길 때'},
+  {type:'Food',title:'천마화',cn:'陈麻花',why:'자기구고진 기념품 과자',when:'8/28 오전'}
+];
+const PHRASES=[
+ ['한국 여권으로 숙박 가능한가요?','韩国护照可以入住吗？'],
+ ['외국인 숙박등록 가능한가요?','可以办理外国人住宿登记吗？'],
+ ['체크인하고 싶어요.','我想办理入住。'],
+ ['체크아웃하고 싶어요.','我想办理退房。'],
+ ['짐을 잠시 맡아주실 수 있나요?','可以帮我寄存一下行李吗？'],
+ ['이 주소로 가주세요.','请带我去这个地址。'],
+ ['여기서 내려주세요.','请在这里停车。'],
+ ['우롱남역 맞나요?','是武隆南站吗？'],
+ ['이 장소가 어디예요?','这个地方在哪里？'],
+ ['여기까지 어떻게 가나요?','去这里怎么走？'],
+ ['고덕지도에서 이 이름을 검색해주세요.','请在高德地图搜索这个名字。'],
+ ['두 명이에요.','两位。'],
+ ['예약했어요.','我有预约。'],
+ ['추천 메뉴가 뭐예요?','有什么推荐菜？'],
+ ['덜 맵게 해주세요.','请少辣一点。'],
+ ['맵지 않게 해주세요.','请不要辣。'],
+ ['마라맛과 마늘맛 반반 가능한가요?','麻辣和蒜蓉可以各来一半吗？'],
+ ['포장해 주세요.','请帮我打包。'],
+ ['물 한 병 주세요.','请给我一瓶水。'],
+ ['이거 얼마예요?','这个多少钱？'],
+ ['조금 깎아주실 수 있나요?','可以便宜一点吗？'],
+ ['계산할게요.','买单，谢谢。'],
+ ['영수증 주세요.','请给我小票。'],
+ ['알리페이로 결제할 수 있나요?','可以用支付宝吗？'],
+ ['카드도 되나요?','可以刷卡吗？'],
+ ['화장실이 어디예요?','洗手间在哪里？'],
+ ['사진 찍어주실 수 있나요?','可以帮我们拍张照片吗？'],
+ ['좀 더 천천히 말씀해 주세요.','请说慢一点。'],
+ ['인터넷 비밀번호가 뭐예요?','Wi-Fi密码是什么？'],
+ ['도와주세요.','请帮帮我。']
+];
+const CHECKS=['여권 유효기간 확인','Alipay 해외카드 등록·본인인증','WeChat 결제수단 준비','12306 로그인 및 실명인증','충칭동 ↔ 우롱남 왕복 고속철 예약','우롱 숙소 위치 확정','Fandiao Apartment 외국인 숙박등록 확인','우롱 입장권 확인','두 숙소 중국어 주소 저장','고덕지도 즐겨찾기 저장','보조배터리·우산·우비·운동화 준비','현금 비상용 준비','칭다오·지난 환승 동선 확인'];
+const STORE='cqTripV16';
+let state={base:1800,shop:250,expenseNote:'',splitItems:[],freeNote:'',visitedSpots:{},visitedFoods:{},bookingMemos:{},detailMemos:{spot:{},food:{}}};
+try{state={...state,...JSON.parse(localStorage.getItem(STORE)||localStorage.getItem('cqTripV11')||localStorage.getItem('cqTripV8')||localStorage.getItem('cqTripV7')||localStorage.getItem('cqTripV6')||'{}')}}catch(e){}
+state.bookingMemos=state.bookingMemos||{};state.detailMemos=state.detailMemos||{spot:{},food:{}};state.detailMemos.spot=state.detailMemos.spot||{};state.detailMemos.food=state.detailMemos.food||{};
+const save=()=>localStorage.setItem(STORE,JSON.stringify(state));
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const color=i=>COLORS[(i%COLORS.length+COLORS.length)%COLORS.length];
+const mask=i=>MASKS[(i%MASKS.length+MASKS.length)%MASKS.length];
+function toast(msg='COPIED'){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__tt);window.__tt=setTimeout(()=>t.classList.remove('show'),950)}
+async function copyText(v){try{await navigator.clipboard.writeText(v);toast()}catch(e){toast('LONG PRESS TO COPY')}}
 function nav(current){
   const group=['book','money','talk','check','maybe','weather','emergency'].includes(current)?'more':current;
   const items=[['today','◎','TODAY'],['plan','◷','PLAN'],['spots','⌖','SPOTS'],['eat','✦','EAT'],['more','•••','MORE']];
