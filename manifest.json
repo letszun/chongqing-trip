@@ -1,0 +1,10 @@
+{
+  "name":"충칭·우롱 4박5일 여행앱",
+  "short_name":"충칭여행",
+  "start_url":"./index.html",
+  "display":"standalone",
+  "background_color":"#f6f7fb",
+  "theme_color":"#111827",
+  "lang":"ko-KR",
+  "description":"충칭·우롱 4박5일 일정, 먹거리, 예산, 중국어, 체크리스트를 담은 오프라인 여행앱"
+}
