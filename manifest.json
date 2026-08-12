@@ -1,14 +1,14 @@
 {
   "name":"Chongqing City",
   "short_name":"CQ City",
-  "start_url":"./index.html#plan",
+  "start_url":"./index.html",
   "scope":"./",
   "display":"standalone",
-  "background_color":"#f4efe8",
+  "background_color":"#f4f0e8",
   "theme_color":"#111111",
   "description":"Chongqing & Wulong trip planner",
   "icons":[
-    {"src":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='44' fill='%23111111'/%3E%3Crect x='18' y='18' width='156' height='156' rx='38' fill='%23f05a4f'/%3E%3Ctext x='96' y='114' text-anchor='middle' font-family='Arial' font-size='58' font-weight='800' fill='white'%3ECQ%3C/text%3E%3C/svg%3E","sizes":"192x192","type":"image/svg+xml"},
-    {"src":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='118' fill='%23111111'/%3E%3Crect x='44' y='44' width='424' height='424' rx='98' fill='%23f05a4f'/%3E%3Ctext x='256' y='304' text-anchor='middle' font-family='Arial' font-size='168' font-weight='800' fill='white'%3ECQ%3C/text%3E%3C/svg%3E","sizes":"512x512","type":"image/svg+xml"}
+    {"src":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23111111'/%3E%3Crect x='18' y='18' width='156' height='156' rx='32' fill='%23ee5d53'/%3E%3Ctext x='96' y='112' text-anchor='middle' font-family='Arial' font-size='58' font-weight='800' fill='white'%3ECQ%3C/text%3E%3C/svg%3E","sizes":"192x192","type":"image/svg+xml"},
+    {"src":"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%23111111'/%3E%3Crect x='40' y='40' width='432' height='432' rx='92' fill='%23ee5d53'/%3E%3Ctext x='256' y='302' text-anchor='middle' font-family='Arial' font-size='170' font-weight='800' fill='white'%3ECQ%3C/text%3E%3C/svg%3E","sizes":"512x512","type":"image/svg+xml"}
   ]
 }

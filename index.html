@@ -2,196 +2,339 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#111111">
 <title>Chongqing City</title>
 <link rel="manifest" href="manifest.json">
 <style>
+@import url('https://cdn.jsdelivr.net/npm/pretendard/dist/web/static/pretendard.css');
 :root{
-  --bg:#f4efe8;--paper:#fffdf8;--ink:#111;--muted:#666;
-  --red:#f05a4f;--yellow:#f7d95d;--blue:#78aaf6;--purple:#afa6ff;--mint:#8fd9c7;--orange:#ffad73;--pink:#f2a8d8;
-  --shadow:0 14px 34px rgba(0,0,0,.08);--r:30px;
+  --bg:#f4f0e8;
+  --paper:#fffdf8;
+  --ink:#111111;
+  --muted:#666666;
+  --line:rgba(17,17,17,.08);
+  --red:#ee5d53;
+  --yellow:#f6df60;
+  --blue:#8cb0ff;
+  --lav:#b9b2ff;
+  --pink:#f4b5dd;
+  --mint:#a8e2cf;
+  --sand:#efe7d6;
+  --black:#111111;
+  --white:#ffffff;
+  --shadow:0 14px 34px rgba(0,0,0,.08);
+  --r-xl:34px;
+  --r-lg:28px;
+  --r-md:22px;
+  --english:"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 *{box-sizing:border-box}
 html{background:var(--bg);scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,"Noto Sans KR",Arial,sans-serif;letter-spacing:-.02em}
-button,input,textarea{font:inherit}button{border:0}a{color:inherit;text-decoration:none}
-.app{width:min(100%,760px);margin:0 auto;min-height:100vh;padding:0 18px 112px}
+body{margin:0;background:linear-gradient(180deg,#f7f2eb 0%,#f3ede5 100%);color:var(--ink);font-family:"Pretendard",-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;letter-spacing:-.02em}
+button,input,textarea,select{font:inherit}
+button{border:0;background:none;cursor:pointer}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.app{width:min(100%,780px);margin:0 auto;min-height:100vh;padding:0 18px 120px}
 .view{display:none}.view.active{display:block}
-.top{padding:calc(24px + env(safe-area-inset-top)) 0 18px}
-.kicker{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#5b5b5b}
-h1{margin:8px 0 0;font-size:clamp(42px,11vw,72px);line-height:.88;letter-spacing:-.065em;font-weight:950}
-.sub{margin:10px 0 0;font-size:13px;line-height:1.55;color:var(--muted);font-weight:600}
+.page-top{padding:calc(22px + env(safe-area-inset-top)) 0 16px}
+.kicker{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.en-title,.big-en,.nav-label,.chip,.mini-title{font-family:var(--english)}
+.hero-title{margin:8px 0 0;font-family:var(--english);font-size:clamp(42px,11vw,74px);line-height:.88;letter-spacing:-.07em;font-weight:900}
+.hero-sub{margin:10px 0 0;font-size:13px;line-height:1.55;color:var(--muted)}
 .pills{display:flex;gap:8px;overflow:auto;padding:14px 0 2px;scrollbar-width:none}.pills::-webkit-scrollbar{display:none}
-.pill{flex:none;background:#fff;padding:9px 12px;border-radius:999px;box-shadow:var(--shadow);font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
-.hero{background:#111;color:#fff;border-radius:34px;padding:22px;box-shadow:var(--shadow);margin-top:16px}
-.hero small{font-size:10px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.62)}
-.hero strong{display:block;font-size:30px;line-height:.95;letter-spacing:-.05em;margin-top:8px}
-.hero p{margin:10px 0 0;font-size:12px;line-height:1.55;color:rgba(255,255,255,.7)}
-.day-stack{display:grid;gap:14px;margin-top:18px}
-.day-card{border-radius:32px;padding:18px;box-shadow:var(--shadow);overflow:hidden}
-.c0{background:var(--red);color:#fff}.c1{background:var(--yellow)}.c2{background:var(--blue)}.c3{background:var(--purple)}.c4{background:var(--mint)}.c5{background:var(--orange)}.c6{background:var(--pink)}
-.day-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
-.day-no{font-size:11px;font-weight:950;letter-spacing:.09em;text-transform:uppercase}
-.day-name{font-size:clamp(28px,8vw,42px);line-height:.92;letter-spacing:-.05em;font-weight:950;margin-top:6px}
-.day-place{font-size:11px;font-weight:700;margin-top:8px;opacity:.72}
-.datebox{text-align:right}.datebox b{display:block;font-size:18px;letter-spacing:-.04em}.datebox span{display:inline-block;margin-top:5px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,.6);font-size:9px;font-weight:900;letter-spacing:.08em}
-.c0 .datebox span{background:rgba(255,255,255,.18)}
-.events{display:grid;gap:8px;margin-top:16px}.event{display:grid;grid-template-columns:54px 1fr;gap:10px;padding:11px 12px;border-radius:18px;background:rgba(255,255,255,.56);text-align:left;width:100%;color:inherit}.c0 .event{background:rgba(255,255,255,.14)}
-.event.clickable{cursor:pointer}.time{font-size:10px;font-weight:950;padding-top:2px}.etitle{font-size:14px;font-weight:900;line-height:1.2}.esub{font-size:10px;line-height:1.4;margin-top:4px;opacity:.68;font-weight:650}.clickable .etitle:after{content:' ↗';font-size:10px;font-weight:950}
-.pagehead{padding:calc(24px + env(safe-area-inset-top)) 0 12px}.pagehead .kicker{margin-bottom:7px}.pagehead h1{margin:0}
-.filters{display:flex;gap:8px;overflow:auto;padding:10px 0 6px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.filter{background:#fff;padding:10px 13px;border-radius:999px;box-shadow:var(--shadow);font-size:10px;font-weight:950;white-space:nowrap}.filter.active{background:#111;color:#fff}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
-.tile{position:relative;min-height:178px;border-radius:28px;padding:16px;box-shadow:var(--shadow);cursor:pointer;overflow:hidden;text-align:left;color:var(--ink)}
-.tile .tag{display:inline-block;padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.65);font-size:9px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
-.tile .tname{font-size:24px;font-weight:950;line-height:.96;letter-spacing:-.05em;margin-top:16px}.tile .tcn{font-size:11px;line-height:1.4;margin-top:7px;opacity:.72;font-weight:700}.tile .tdate{position:absolute;bottom:16px;left:16px;font-size:10px;font-weight:900}.tile .arrow{position:absolute;right:14px;bottom:14px;width:36px;height:36px;border-radius:50%;background:#111;color:#fff;display:grid;place-items:center;font-size:18px;font-weight:900}
-.moneyhero{background:#111;color:#fff;border-radius:34px;padding:22px;box-shadow:var(--shadow);margin-top:14px}.moneyhero .label{font-size:10px;font-weight:950;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)}.moneyhero .num{font-size:clamp(50px,14vw,88px);line-height:.9;letter-spacing:-.08em;font-weight:950;margin-top:14px}.moneyhero .num small{font-size:13px;letter-spacing:.04em}
-.inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.inputcard{border-radius:26px;padding:16px;box-shadow:var(--shadow)}.inputcard label{display:block;font-size:9px;font-weight:950;letter-spacing:.1em;text-transform:uppercase}.inputcard input{width:100%;border:0;background:transparent;outline:0;font-size:32px;font-weight:950;padding-top:8px;letter-spacing:-.05em}
-.info-list{display:grid;gap:10px;margin-top:14px}.info{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:15px 16px;border-radius:22px;box-shadow:var(--shadow);font-size:12px;font-weight:800}.info b{font-size:13px;white-space:nowrap}
-.note{margin-top:14px;background:#fff;border-radius:26px;padding:16px;box-shadow:var(--shadow)}.note label{display:block;font-size:9px;font-weight:950;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}.note textarea{width:100%;min-height:120px;border:0;outline:0;resize:vertical;background:transparent;line-height:1.6}
-.talkgrid,.checkgrid{display:grid;gap:12px;margin-top:14px}.chat{border-radius:26px;padding:16px;box-shadow:var(--shadow)}.chat .ko{font-size:11px;line-height:1.45;font-weight:700;opacity:.78}.chat .zh{font-size:21px;line-height:1.05;font-weight:950;margin:9px 0 14px}.copybtn{background:#111;color:#fff;border-radius:999px;padding:9px 12px;font-size:9px;font-weight:950;letter-spacing:.08em}
-.check{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:flex-start;padding:16px;border-radius:24px;box-shadow:var(--shadow);background:#fff}.check input{appearance:none;width:21px;height:21px;border-radius:50%;border:2px solid #111;margin:1px 0 0}.check input:checked{background:var(--red);border-color:var(--red);position:relative}.check input:checked:after{content:'✓';position:absolute;left:4px;top:-2px;color:#fff;font-size:14px;font-weight:950}.check.done .ctext{text-decoration:line-through;opacity:.42}.ctext{font-size:13px;font-weight:800;line-height:1.45}
-.detailwrap{padding:calc(22px + env(safe-area-inset-top)) 0 20px}.back{display:inline-flex;align-items:center;gap:7px;background:#fff;border-radius:999px;padding:9px 12px;box-shadow:var(--shadow);font-size:10px;font-weight:950;letter-spacing:.06em}.detailhero{margin-top:14px;border-radius:34px;padding:22px;box-shadow:var(--shadow)}.detailposter{margin-top:14px;border-radius:34px;padding:20px;box-shadow:var(--shadow);overflow:hidden;position:relative}.detailposter-top{display:grid;grid-template-columns:1fr;gap:16px}.detailphoto-wrap{width:min(100%,430px);aspect-ratio:1.22/1;margin:2px auto 0;position:relative;display:grid;place-items:center}.detailphoto-shape{position:relative;width:100%;height:100%;overflow:hidden;background:rgba(255,255,255,.45);border-radius:43% 57% 52% 48% / 38% 45% 55% 62%;transform:rotate(-1.5deg);box-shadow:0 14px 28px rgba(0,0,0,.10)}.detailphoto-shape:nth-child(1){clip-path:polygon(7% 15%,26% 4%,49% 9%,70% 2%,91% 17%,96% 42%,88% 65%,96% 86%,72% 96%,49% 90%,27% 98%,6% 80%,10% 55%,2% 34%)}.detailphoto{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.03)}.detailphoto-shape.fallback{background:linear-gradient(135deg,rgba(255,255,255,.75),rgba(17,17,17,.12))}.detailphoto-shape.fallback:after{content:'PHOTO';position:absolute;inset:0;display:grid;place-items:center;font-size:12px;font-weight:950;letter-spacing:.18em;color:rgba(17,17,17,.4)}.detailposter .dtype{font-size:10px;font-weight:950;letter-spacing:.1em;text-transform:uppercase}.detailposter .dname{font-size:clamp(38px,10vw,64px);line-height:.9;font-weight:950;letter-spacing:-.06em;margin-top:10px}.detailposter .dcn{font-size:17px;font-weight:750;margin-top:8px;opacity:.72}.detailposter .dtags{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}.detailposter .dtags span{padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.62);font-size:9px;font-weight:950}.detailcaption{text-align:center;margin-top:8px;font-size:10px;font-weight:800;opacity:.62}.dtype{font-size:10px;font-weight:950;letter-spacing:.1em;text-transform:uppercase}.dname{font-size:clamp(38px,10vw,64px);line-height:.9;font-weight:950;letter-spacing:-.06em;margin-top:10px}.dcn{font-size:17px;font-weight:750;margin-top:8px;opacity:.72}.dtags{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}.dtags span{padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.62);font-size:9px;font-weight:950}
-.section{background:#fff;border-radius:26px;padding:18px;box-shadow:var(--shadow);margin-top:12px}.section h2{font-size:10px;font-weight:950;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 9px}.section p,.section li{font-size:13px;line-height:1.65}.section p{margin:0}.section ul{margin:0;padding-left:18px}
-.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.action{background:#111;color:#fff;border-radius:999px;padding:11px 14px;font-size:9px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
-.bottom{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);width:min(calc(100% - 24px),736px);background:rgba(17,17,17,.95);backdrop-filter:blur(18px);padding:8px 8px calc(8px + env(safe-area-inset-bottom));border-radius:24px;box-shadow:0 16px 34px rgba(0,0,0,.22);display:grid;grid-template-columns:repeat(6,1fr);gap:3px;z-index:50}.nav{display:flex;flex-direction:column;align-items:center;gap:3px;color:rgba(255,255,255,.56);padding:8px 1px;border-radius:17px;font-size:8px;font-weight:950;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}.nav.active{background:#fff;color:#111}.nav i{font-style:normal;font-size:15px;line-height:1}
-.toast{position:fixed;left:50%;bottom:98px;transform:translate(-50%,14px);background:#111;color:#fff;padding:10px 14px;border-radius:999px;font-size:9px;font-weight:950;opacity:0;transition:.2s;z-index:80}.toast.show{opacity:1;transform:translate(-50%,0)}
-@media(min-width:700px){.day-stack{grid-template-columns:1fr 1fr}.talkgrid,.checkgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:420px){.grid{gap:10px}.tile{min-height:168px;padding:14px}.tile .tname{font-size:22px}.app{padding-left:14px;padding-right:14px}}
+.pill{flex:none;background:var(--white);padding:9px 12px;border-radius:999px;box-shadow:var(--shadow);font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.banner{margin-top:16px;background:var(--black);color:var(--white);padding:22px;border-radius:34px;box-shadow:var(--shadow)}
+.banner small{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+.banner strong{display:block;font-family:var(--english);font-size:30px;line-height:.95;letter-spacing:-.05em;margin-top:10px}
+.banner p{margin:10px 0 0;font-size:12px;line-height:1.55;color:rgba(255,255,255,.72)}
+.grid{display:grid;gap:14px}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.section-top{padding:calc(22px + env(safe-area-inset-top)) 0 12px}
+.section-title{margin:0;font-family:var(--english);font-size:clamp(38px,10vw,62px);line-height:.92;letter-spacing:-.06em;font-weight:900}
+.section-sub{margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.55}
+.filters{display:flex;gap:8px;overflow:auto;padding:12px 0 6px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}
+.filter{flex:none;background:var(--white);border-radius:999px;padding:10px 13px;box-shadow:var(--shadow);font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.filter.active{background:var(--black);color:var(--white)}
+.card{position:relative;border-radius:var(--r-xl);padding:18px;box-shadow:var(--shadow);overflow:hidden}
+.color-red{background:var(--red);color:#fff}.color-yellow{background:var(--yellow)}.color-blue{background:var(--blue)}.color-lav{background:var(--lav)}.color-pink{background:var(--pink)}.color-mint{background:var(--mint)}.color-sand{background:var(--sand)}.color-black{background:var(--black);color:#fff}.color-white{background:var(--white)}
+.day-card .head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.day-card .day-no{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.day-card .day-title{font-family:var(--english);font-size:clamp(28px,8vw,42px);line-height:.92;letter-spacing:-.05em;font-weight:900;margin-top:6px}
+.day-card .day-place{font-size:11px;font-weight:700;opacity:.74;margin-top:8px}
+.day-card .date-box{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.day-card .date-box b{font-size:18px;letter-spacing:-.04em}.day-card .date-box span{display:inline-flex;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.6);font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.color-red .date-box span,.color-black .date-box span{background:rgba(255,255,255,.18);color:#fff}
+.events{display:grid;gap:9px;margin-top:16px}
+.event{display:grid;grid-template-columns:58px 1fr;gap:12px;text-align:left;width:100%;padding:11px 12px;border-radius:20px;background:rgba(255,255,255,.56)}
+.color-red .event,.color-black .event{background:rgba(255,255,255,.12);color:#fff}
+.event .time{font-size:10px;font-weight:900;padding-top:2px}.event .title{font-size:14px;font-weight:800;line-height:1.24}.event .sub{font-size:10px;line-height:1.42;margin-top:4px;opacity:.72}.event.clickable .title:after{content:' ↗';font-size:10px;font-weight:900}
+.tile{min-height:184px;text-align:left;border-radius:30px;padding:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.tile .chip{display:inline-flex;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.66);font-size:9px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.tile .name{margin-top:18px;font-family:var(--english);font-size:25px;line-height:.95;letter-spacing:-.05em;font-weight:900}
+.tile .caption{margin-top:8px;font-size:12px;line-height:1.45;color:#363636}
+.tile .meta{position:absolute;left:16px;bottom:16px;font-size:10px;font-weight:800;color:#353535}
+.tile .go{position:absolute;right:14px;bottom:14px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(17,17,17,.92);color:#fff;font-size:18px;font-weight:900}
+.today-hero{display:grid;gap:14px}
+.today-card{border-radius:34px;padding:22px;box-shadow:var(--shadow)}
+.today-card .tiny{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+.today-card .big-num{font-family:var(--english);font-size:clamp(54px,16vw,92px);line-height:.88;letter-spacing:-.09em;font-weight:900;margin-top:10px}
+.today-card .big-title{font-family:var(--english);font-size:clamp(30px,9vw,48px);line-height:.92;letter-spacing:-.06em;font-weight:900;margin-top:8px}
+.today-card .info{margin-top:12px;font-size:13px;line-height:1.55}
+.quick-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+.quick-btn{padding:16px;border-radius:24px;text-align:left;box-shadow:var(--shadow);min-height:116px}
+.quick-btn .mini-title{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.quick-btn strong{display:block;font-family:var(--english);font-size:23px;line-height:.95;letter-spacing:-.05em;margin-top:10px}
+.quick-btn p{margin:8px 0 0;font-size:12px;line-height:1.48;color:var(--muted)}
+.booking-list,.talk-list,.check-list,.maybe-list,.expense-list{display:grid;gap:12px;margin-top:14px}
+.booking{padding:16px;border-radius:26px;box-shadow:var(--shadow)}
+.booking .row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.booking .type{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.72}
+.booking .title{font-family:var(--english);font-size:24px;line-height:.95;letter-spacing:-.05em;font-weight:900;margin-top:10px}
+.booking .meta{font-size:12px;line-height:1.55;margin-top:10px}
+.booking .code{margin-top:12px;display:inline-flex;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.68);font-size:10px;font-weight:800;letter-spacing:.06em}
+.money-total{margin-top:16px;background:var(--black);color:#fff;padding:22px;border-radius:34px;box-shadow:var(--shadow)}
+.money-total .tiny{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.68)}
+.money-total .num{font-family:var(--english);font-size:clamp(48px,14vw,86px);line-height:.9;font-weight:900;letter-spacing:-.09em;margin-top:12px}.money-total .num small{font-size:13px;letter-spacing:.04em}
+.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.input-card{padding:16px;border-radius:26px;box-shadow:var(--shadow)}
+.input-card label{display:block;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#444}
+.input-card input,.input-card select{width:100%;border:0;outline:0;background:transparent;font-family:var(--english);font-size:30px;font-weight:900;letter-spacing:-.05em;padding-top:8px;color:var(--ink)}
+.input-card.select select{font-size:19px;font-family:inherit;font-weight:700;padding-top:14px}
+.info-list{display:grid;gap:10px;margin-top:14px}.info-chip{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:15px 16px;border-radius:22px;box-shadow:var(--shadow);font-size:12px;font-weight:800}.info-chip b{font-size:13px}
+.note-card{margin-top:14px;background:var(--white);padding:16px;border-radius:26px;box-shadow:var(--shadow)}
+.note-card label{display:block;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.note-card textarea{width:100%;min-height:108px;border:0;outline:0;resize:vertical;background:transparent;line-height:1.6}
+.expense-item{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 16px;border-radius:22px;box-shadow:var(--shadow)}
+.expense-item .left b{display:block;font-size:15px;line-height:1.2}.expense-item .left span{display:block;font-size:11px;color:var(--muted);margin-top:4px}.expense-item .right{text-align:right}.expense-item .right strong{display:block;font-family:var(--english);font-size:18px}.expense-item .right button{margin-top:6px;font-size:10px;font-weight:800;color:#a00}
+.inline-btn{margin-top:12px;display:inline-flex;padding:10px 14px;border-radius:999px;background:var(--black);color:#fff;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.inline-btn.alt{background:#fff;color:#111;box-shadow:var(--shadow)}
+.talk-card{padding:16px;border-radius:28px;box-shadow:var(--shadow)}
+.talk-card .ko{font-size:11px;line-height:1.48;font-weight:700;opacity:.78}.talk-card .zh{font-size:22px;line-height:1.06;font-weight:900;margin:10px 0 14px}
+.task{display:grid;grid-template-columns:26px 1fr;gap:12px;align-items:flex-start;padding:16px;border-radius:24px;box-shadow:var(--shadow);background:var(--white)}
+.task input{appearance:none;width:21px;height:21px;border-radius:50%;border:2px solid #111;margin:1px 0 0;background:#fff}
+.task input:checked{background:var(--red);border-color:var(--red);position:relative}.task input:checked:after{content:'✓';position:absolute;left:4px;top:-2px;color:#fff;font-size:14px;font-weight:900}
+.task.done .txt{text-decoration:line-through;opacity:.42}.task .txt{font-size:13px;font-weight:800;line-height:1.45}
+.maybe-card{padding:16px;border-radius:28px;box-shadow:var(--shadow)}
+.maybe-card .type{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.72}.maybe-card .title{font-family:var(--english);font-size:24px;line-height:.95;letter-spacing:-.05em;font-weight:900;margin-top:10px}.maybe-card .sub{font-size:12px;line-height:1.55;margin-top:8px}
+.detail-top{padding:calc(20px + env(safe-area-inset-top)) 0 16px}.back{display:inline-flex;align-items:center;gap:7px;padding:9px 12px;border-radius:999px;background:#fff;box-shadow:var(--shadow);font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.detail-card{margin-top:14px;padding:20px;border-radius:34px;box-shadow:var(--shadow)}
+.detail-card .type{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.75}
+.detail-card .name{font-family:var(--english);font-size:clamp(38px,10vw,66px);line-height:.9;letter-spacing:-.06em;font-weight:900;margin-top:10px}
+.detail-card .cn{font-size:17px;font-weight:700;opacity:.75;margin-top:7px}
+.detail-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.detail-tags span{display:inline-flex;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.66);font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.photo-shell{margin-top:16px;display:grid;gap:10px}
+.photo-frame{width:min(100%,460px);aspect-ratio:1.16/1;margin:0 auto;background:rgba(255,255,255,.42);box-shadow:0 16px 28px rgba(0,0,0,.08);overflow:hidden}
+.photo-frame img{width:100%;height:100%;object-fit:cover}
+.photo-frame.fallback{display:grid;place-items:center;background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(17,17,17,.1));color:rgba(17,17,17,.42);font-family:var(--english);font-size:14px;font-weight:900;letter-spacing:.16em}
+.mask-a{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='black' d='M50 2L60 12L74 8L80 22L94 28L90 42L98 50L90 58L94 72L80 78L74 92L60 88L50 98L40 88L26 92L20 78L6 72L10 58L2 50L10 42L6 28L20 22L26 8L40 12Z'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='black' d='M50 2L60 12L74 8L80 22L94 28L90 42L98 50L90 58L94 72L80 78L74 92L60 88L50 98L40 88L26 92L20 78L6 72L10 58L2 50L10 42L6 28L20 22L26 8L40 12Z'/%3E%3C/svg%3E");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.mask-b{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='black' d='M24 8C39 8 40 18 50 18C60 18 61 8 76 8C89 8 94 14 94 27C94 39 84 41 84 50C84 59 94 61 94 73C94 86 89 92 76 92C61 92 60 82 50 82C40 82 39 92 24 92C11 92 6 86 6 73C6 61 16 59 16 50C16 41 6 39 6 27C6 14 11 8 24 8Z'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='black' d='M24 8C39 8 40 18 50 18C60 18 61 8 76 8C89 8 94 14 94 27C94 39 84 41 84 50C84 59 94 61 94 73C94 86 89 92 76 92C61 92 60 82 50 82C40 82 39 92 24 92C11 92 6 86 6 73C6 61 16 59 16 50C16 41 6 39 6 27C6 14 11 8 24 8Z'/%3E%3C/svg%3E");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.mask-c{-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='black' d='M50 8C60 4 74 10 82 20C92 28 96 42 92 54C92 67 84 80 72 86C61 94 47 96 35 91C22 90 12 82 8 69C2 58 2 43 8 31C12 18 22 10 35 9C40 7 45 8 50 8Z'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='black' d='M50 8C60 4 74 10 82 20C92 28 96 42 92 54C92 67 84 80 72 86C61 94 47 96 35 91C22 90 12 82 8 69C2 58 2 43 8 31C12 18 22 10 35 9C40 7 45 8 50 8Z'/%3E%3C/svg%3E");-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.detail-caption{text-align:center;font-size:10px;font-weight:800;opacity:.64}
+.detail-section{margin-top:12px;background:var(--white);border-radius:26px;padding:18px;box-shadow:var(--shadow)}
+.detail-section h3{margin:0 0 10px;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.detail-section p,.detail-section li{font-size:14px;line-height:1.65}.detail-section ul{margin:0;padding-left:18px}
+.action-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.action-btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:999px;background:var(--black);color:var(--white);font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.action-btn.light{background:#fff;color:#111;box-shadow:var(--shadow)}
+.bottom-nav{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);width:min(calc(100% - 24px),780px);background:rgba(17,17,17,.95);backdrop-filter:blur(18px);border-radius:26px;padding:8px 8px calc(8px + env(safe-area-inset-bottom));display:flex;gap:4px;overflow:auto;box-shadow:0 16px 34px rgba(0,0,0,.22);scrollbar-width:none;z-index:40}.bottom-nav::-webkit-scrollbar{display:none}
+.nav-btn{flex:none;min-width:66px;padding:8px 8px 7px;border-radius:18px;color:rgba(255,255,255,.62);display:flex;flex-direction:column;align-items:center;gap:4px}
+.nav-btn.active{background:#fff;color:#111}.nav-btn i{font-style:normal;font-size:16px;line-height:1}.nav-btn .nav-label{font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.toast{position:fixed;left:50%;bottom:98px;transform:translate(-50%,16px);padding:10px 14px;border-radius:999px;background:#111;color:#fff;font-size:10px;font-weight:800;letter-spacing:.06em;opacity:0;pointer-events:none;transition:.2s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media (min-width:720px){.today-hero{grid-template-columns:1.1fr .9fr}.grid-2-lg{grid-template-columns:repeat(2,minmax(0,1fr))}.day-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.grid-2{grid-template-columns:1fr 1fr}.input-grid{grid-template-columns:1fr}.today-card .big-num{font-size:54px}}
 </style>
 </head>
 <body>
 <div class="app">
-  <section id="plan" class="view active"></section>
+  <section id="today" class="view"></section>
+  <section id="plan" class="view"></section>
   <section id="spots" class="view"></section>
   <section id="eat" class="view"></section>
+  <section id="book" class="view"></section>
   <section id="money" class="view"></section>
   <section id="talk" class="view"></section>
   <section id="check" class="view"></section>
+  <section id="maybe" class="view"></section>
   <section id="detail" class="view"></section>
 </div>
-<nav class="bottom" id="bottomNav"></nav>
+<nav class="bottom-nav" id="bottomNav"></nav>
 <div class="toast" id="toast">COPIED</div>
 <script>
-const C=['c0','c1','c2','c3','c4','c5','c6'];
-const PHOTO={
- spot:{
-  jiefangbei:'https://loremflickr.com/900/700/chongqing,city,night?lock=11',
-  bayi:'https://ak-d.tripcdn.com/images/1mi3p12000pbkktnnBECF.jpg?proc=source%2Ftrip',
-  kuixinglou:'https://loremflickr.com/900/700/chongqing,city,stairs?lock=13',
-  hongyadong:'https://loremflickr.com/900/700/chongqing,hongyadong,night?lock=14',
-  provisional:'https://loremflickr.com/900/700/chongqing,historic,building?lock=15',
-  tiansheng:'https://images.haiwainet.cn/2026/0417/20260417025644622.jpg',
-  fairy:'https://loremflickr.com/900/700/china,mountain,grassland?lock=17',
-  longshui:'https://loremflickr.com/900/700/china,gorge,waterfall?lock=18',
-  guanyinqiao:'https://loremflickr.com/900/700/chongqing,shopping,night?lock=19',
-  beicang:'https://loremflickr.com/900/700/china,creative,district,cafe?lock=20',
-  jiujie:'https://ak-d.tripcdn.com/images/1mi3p12000pbkktnnBECF.jpg?proc=source%2Ftrip',
-  luohansi:'https://loremflickr.com/900/700/china,buddhist,temple?lock=22',
-  ciqikou:'https://p3-q.mafengwo.net/s12/M00/99/27/wKgED1vW65-ANY0_ABAdNfHxHg070.jpeg',
-  liziba:'https://loremflickr.com/900/700/chongqing,monorail,city?lock=24',
-  elingfactory:'https://loremflickr.com/900/700/china,industrial,design,cafe?lock=25',
-  shibati:'https://loremflickr.com/900/700/chongqing,old,street,stairs?lock=26',
-  xiahao:'https://loremflickr.com/900/700/chongqing,old,street,river?lock=27',
-  longmenhao:'https://loremflickr.com/900/700/chongqing,old,street,night?lock=28'
- },
- food:{
-  milk:'https://loremflickr.com/900/700/milk,tea,boba?lock=31',
-  lamb:'https://loremflickr.com/900/700/chinese,lamb,hotpot?lock=32',
-  grilledfish:'https://ak-d.tripcdn.com/images/1mi5e224x972o0g15BA1A.jpg?proc=source%2Ftrip',
-  dimsum:'https://tb-static.uber.com/prod/image-proc/processed_images/11a27727d32439adfe689f38df9e0914/719c6bd2757b08684c0faae44d43159d.jpeg',
-  xiaomian:'https://tb-static.uber.com/prod/image-proc/processed_images/11a27727d32439adfe689f38df9e0914/719c6bd2757b08684c0faae44d43159d.jpeg',
-  crayfish:'https://ak-d.tripcdn.com/images/1mi3p12000pbkktnnBECF.jpg?proc=source%2Ftrip',
-  mahua:'https://loremflickr.com/900/700/chinese,pastry,snack?lock=37',
-  pepperlatte:'https://loremflickr.com/900/700/latte,coffee,cafe?lock=38'
- }};
-function photoFor(type,id){return PHOTO[type]?.[id]||'https://loremflickr.com/900/700/travel?lock=99'}
+const COLORS=['color-red','color-yellow','color-blue','color-lav','color-pink','color-mint','color-sand'];
+const MASKS=['mask-a','mask-b','mask-c'];
+const DAYS=[
+  {id:1,date:'08.25',dow:'MON',name:'Arrival',place:'충칭 · Fandiao Meiju',sleep:'Fandiao Meiju',food:'밀크티 · 야시장',events:[
+    ['18:05','충칭 도착','입국 후 지하철 또는 택시 이동'],
+    ['19:30','숙소 체크인','지에팡베이 인근'],
+    ['20:10','해방비','야경 · 산책','spot','jiefangbei'],
+    ['20:40','밀크티 한 잔','첫날 가볍게','food','milktea'],
+    ['21:10','홍야동','야경 보기','spot','hongyadong'],
+    ['22:10','바이이 하오츠제','야시장 간식','spot','bayi']
+  ]},
+  {id:2,date:'08.26',dow:'TUE',name:'Wulong In',place:'충칭 → 우롱',sleep:'우롱 숙소',food:'우롱 양고기',events:[
+    ['09:00','임정청사','오전 한 곳만 보기','spot','tmpgov'],
+    ['11:46','충칭동 → 우롱남','고속철 이동'],
+    ['14:00','천생삼교','오후 메인 코스','spot','tiansheng'],
+    ['18:30','우롱 양고기','저녁 식사','food','yangrou']
+  ]},
+  {id:3,date:'08.27',dow:'WED',name:'Wulong Out',place:'우롱 → 충칭',sleep:'Fandiao Apartment',food:'카오위',events:[
+    ['08:00','선녀산','아침 산책','spot','fairymountain'],
+    ['11:00','용수협지봉','협곡 코스','spot','longshuixia'],
+    ['17:03','우롱남 → 충칭동','고속철 복귀'],
+    ['19:30','관음교','저녁 상권','spot','guanyinqiao'],
+    ['20:30','카오위','충칭 복귀 첫 저녁','food','kaoyu'],
+    ['22:00','구가(九街)','밤거리 옵션','spot','jiujie']
+  ]},
+  {id:4,date:'08.28',dow:'THU',name:'City Walk',place:'충칭 시내 풀데이',sleep:'Fandiao Apartment',food:'딤섬 · 샤오몐 · 마라롱샤',events:[
+    ['08:40','나한사','아침 방문','spot','luohansi'],
+    ['10:00','자기구고진','간식·기념품','spot','ciqikou'],
+    ['12:00','리즈바역','경전철 사진','spot','liziba'],
+    ['12:40','어링얼창','카페 쉬기','spot','ering'],
+    ['13:20','샤오몐','가볍게 점심','food','xiaomian'],
+    ['17:00','십팔제','구도심 산책','spot','shibati'],
+    ['18:30','샤하오리','해질 무렵 산책','spot','xiahao'],
+    ['20:30','마라롱샤','야식 타임','food','xiaolongxia']
+  ]},
+  {id:5,date:'08.29',dow:'FRI',name:'Home',place:'충칭 → 지난 → 인천',sleep:'귀가',food:'산둥 한 끼',events:[
+    ['08:30','샤오몐 또는 간단 조식','출국 전 마지막 식사','food','xiaomian'],
+    ['10:10','공항 이동','충칭 강북공항'],
+    ['13:30','충칭 → 지난','환승'],
+    ['16:20','산둥 음식 · 카페','지난 공항 활용'],
+    ['20:10','지난 → 인천','22:40 도착']
+  ]}
+];
 const SPOTS={
- jiefangbei:{name:'해방비',cn:'解放碑步行街',area:'충칭 · 위중구',date:'8/25',kind:'CITY CENTER',duration:'40–60분',summary:'충칭 도심의 중심 상권. 첫날 저녁 홍야동과 묶어서 보기 좋습니다.',highlights:['야간 상권','대형 쇼핑몰','홍야동 도보권'],tips:['첫날 체크인 후 바로 산책하기 좋은 위치'],search:'解放碑步行街'},
- bayi:{name:'바이이 하오츠제',cn:'八一好吃街',area:'충칭 · 위중구',date:'8/25',kind:'NIGHT FOOD',duration:'40–60분',summary:'충칭식 간식과 야식을 여러 종류 조금씩 먹기 좋은 먹거리 거리입니다.',highlights:['빙펀','꼬치','산라펀','밀크티'],tips:['한 끼보다 여러 메뉴를 나눠 먹는 방식 추천'],search:'八一好吃街'},
- kuixinglou:{name:'쿠이싱러우 · 다이자샹',cn:'魁星楼 · 戴家巷',area:'충칭 · 위중구',date:'8/25',kind:'CITY WALK',duration:'30–50분',summary:'충칭 특유의 고저차와 절벽형 보행로를 체감할 수 있는 야간 산책 구간입니다.',highlights:['입체적인 도시 구조','홍야동으로 이어지는 동선'],tips:['해방비와 홍야동 사이에 넣기 좋음'],search:'魁星楼 戴家巷'},
- hongyadong:{name:'홍야동',cn:'洪崖洞',area:'충칭 · 위중구',date:'8/25',kind:'NIGHT VIEW',duration:'45–90분',summary:'충칭 첫날 야경의 핵심. 건물 자체보다 강변과 맞은편에서 보는 전경이 인상적입니다.',highlights:['야간 조명','자링강 야경','해방비 도보권'],tips:['사람이 많으면 내부보다 외부 전경 위주로'],search:'洪崖洞'},
- provisional:{name:'대한민국 임시정부 청사',cn:'重庆大韩民国临时政府旧址陈列馆',area:'충칭 · 위중구',date:'8/26',kind:'HISTORY',duration:'50–70분',summary:'충칭 시기 대한민국 임시정부의 흔적을 볼 수 있는 역사 공간입니다.',highlights:['한국 근현대사','충칭 체류기의 임시정부'],tips:['우롱 이동일 오전 방문 후 역으로 이동'],search:'重庆大韩民国临时政府旧址陈列馆'},
- tiansheng:{name:'천생삼교',cn:'天生三桥',area:'우롱',date:'8/26',kind:'WULONG',duration:'2–3시간',summary:'거대한 천연 석교와 카르스트 지형을 걷는 우롱 핵심 관광지입니다.',highlights:['천연 석교 3개','거대한 천坑 지형','압도적인 절벽 스케일'],tips:['운동화 추천','우롱 도착 첫날 오후 일정'],search:'武隆天生三桥'},
- fairy:{name:'선녀산',cn:'仙女山国家森林公园',area:'우롱',date:'8/27',kind:'WULONG',duration:'2–3시간',summary:'초원과 숲이 중심인 고지대 풍경. 천생삼교와 분위기가 완전히 다릅니다.',highlights:['초원','삼림','아침 산책'],tips:['오전에 먼저 보고 용수협지봉으로 이동'],search:'仙女山国家森林公园'},
- longshui:{name:'용수협지봉',cn:'龙水峡地缝',area:'우롱',date:'8/27',kind:'WULONG',duration:'1.5–2시간',summary:'좁고 깊은 협곡을 따라 걷는 트레킹 코스입니다.',highlights:['협곡','폭포','절벽'],tips:['젖은 바닥 대비 미끄럽지 않은 신발 추천'],search:'龙水峡地缝'},
- guanyinqiao:{name:'관음교',cn:'观音桥步行街',area:'충칭 · 장베이구',date:'8/27',kind:'SHOPPING',duration:'2–3시간',summary:'충칭의 현대적인 쇼핑·외식 중심지. 우롱에서 돌아온 날 저녁 코스로 좋습니다.',highlights:['쇼핑몰','식당','야간 상권'],tips:['북창·카오위·구가를 한 번에 묶기'],search:'观音桥步行街'},
- beicang:{name:'북창',cn:'北仓文创街区',area:'충칭 · 장베이구',date:'8/27',kind:'CULTURE',duration:'40–60분',summary:'옛 창고를 재생한 문화·카페 거리입니다.',highlights:['카페','작은 상점','문창공간'],tips:['관음교 저녁 전후에 걷기'],search:'北仓文创街区'},
- jiujie:{name:'구가',cn:'九街',area:'충칭 · 장베이구',date:'8/27',kind:'LATE NIGHT',duration:'1–2시간',summary:'늦은 밤까지 이어지는 식당·술집 중심의 심야 상권입니다.',highlights:['야식','맥주','심야 분위기'],tips:['카오위 후 2차 코스로'],search:'九街'},
- luohansi:{name:'나한사',cn:'罗汉寺',area:'충칭 · 위중구',date:'8/28',kind:'TEMPLE',duration:'40–60분',summary:'도심 고층건물 사이에 자리한 사찰입니다.',highlights:['도심 속 사찰','석조 나한상'],tips:['오전에 짧게 보기 좋음'],search:'重庆罗汉寺'},
- ciqikou:{name:'자기구고진',cn:'磁器口古镇',area:'충칭 · 사핑바구',date:'8/28',kind:'OLD TOWN',duration:'1.5–2시간',summary:'충칭의 대표 고진. 골목과 간식·기념품 쇼핑을 함께 하기 좋습니다.',highlights:['옛 거리','陈麻花','기념품'],tips:['오전 후반 방문 추천'],search:'磁器口古镇'},
- liziba:{name:'리즈바역',cn:'李子坝',area:'충칭 · 위중구',date:'8/28',kind:'LANDMARK',duration:'30–40분',summary:'모노레일이 건물을 통과하는 충칭 대표 랜드마크입니다.',highlights:['건물 관통 모노레일','전망 플랫폼'],tips:['사진 위주면 30~40분이면 충분'],search:'李子坝单轨穿楼观景平台'},
- elingfactory:{name:'어링얼창',cn:'鹅岭二厂',area:'충칭 · 위중구',date:'8/28',kind:'DESIGN',duration:'60–90분',summary:'옛 인쇄공장을 재생한 문화창작 공간입니다.',highlights:['산업 재생 공간','사진','카페'],tips:['리즈바와 묶어서 보기'],search:'鹅岭二厂文创公园'},
- shibati:{name:'십팔제',cn:'十八梯传统风貌区',area:'충칭 · 위중구',date:'8/28',kind:'OLD CITY',duration:'45–60분',summary:'계단식 구도심 풍경을 정비한 거리입니다.',highlights:['계단 골목','야간 조명'],tips:['늦은 오후나 저녁 추천'],search:'十八梯传统风貌区'},
- xiahao:{name:'샤하오리',cn:'下浩里',area:'충칭 · 난안구',date:'8/28',kind:'OLD STREET',duration:'60–90분',summary:'산비탈 골목과 장강 풍경을 함께 볼 수 있는 거리입니다.',highlights:['산비탈 골목','장강 풍경','카페'],tips:['해질 무렵 방문','룽먼하오까지 이어 걷기'],search:'下浩里老街'},
- longmenhao:{name:'룽먼하오 라오제',cn:'龙门浩老街',area:'충칭 · 난안구',date:'8/28',kind:'OLD STREET',duration:'40–60분',summary:'샤하오리와 자연스럽게 이어지는 역사 거리입니다.',highlights:['옛 건물','야경','남빈루 접근'],tips:['샤하오리에서 이어서 걷기'],search:'龙门浩老街'}
+  jiefangbei:{kind:'City',name:'Jiefangbei',cn:'解放碑',area:'충칭 시내',date:'08.25',duration:'40–60 min',search:'解放碑步行街',map:'解放碑步行街 重庆',summary:'충칭 중심 상권. 첫날 밤 분위기를 보기 가장 좋고, 야시장·밀크티·쇼핑을 붙이기 쉽습니다.',highlights:['보행자 거리 산책','네온사인과 야경','밀크티·간식 동선 연결'],tips:['홍야동과 같은 날 묶기 좋음','밤 8시 이후 분위기가 더 좋음'],photo:'https://loremflickr.com/960/720/chongqing,city?lock=101'},
+  hongyadong:{kind:'Night View',name:'Hongyadong',cn:'洪崖洞',area:'충칭 시내',date:'08.25',duration:'45–60 min',search:'洪崖洞',map:'洪崖洞 重庆',summary:'충칭 대표 야경 스팟. 층층이 쌓인 건물과 강가 조명이 포인트입니다.',highlights:['강변 야경','건물 조명','포토 스폿'],tips:['해방비에서 같이 보기 좋음','사람 많아도 외곽에서 보는 뷰가 예쁨'],photo:'https://loremflickr.com/960/720/hongyadong,chongqing?lock=102'},
+  bayi:{kind:'Market',name:'Bayi Street',cn:'八一好吃街',area:'충칭 시내',date:'08.25',duration:'30–50 min',search:'八一好吃街',map:'八一好吃街 重庆',summary:'충칭 대표 먹거리 거리. 여러 간식을 나눠먹기 좋습니다.',highlights:['산라펀·꼬치·빙펀','짧게 둘러보기 좋음'],tips:['메인 저녁 후 2차 간식 장소로 적합'],photo:'https://loremflickr.com/960/720/streetfood,china?lock=103'},
+  tmpgov:{kind:'Museum',name:'KPG Building',cn:'大韩民国临时政府旧址陈列馆',area:'충칭 시내',date:'08.26',duration:'40–60 min',search:'大韩民国临时政府旧址陈列馆',map:'大韩民国临时政府旧址陈列馆 重庆',summary:'대한민국 임시정부 청사 유적 전시관. 오전 한 곳으로 보기 좋습니다.',highlights:['한국 관련 역사 전시','비교적 짧게 관람 가능'],tips:['8/26 오전에 방문 후 역 이동 추천'],photo:'https://loremflickr.com/960/720/museum,history?lock=104'},
+  tiansheng:{kind:'Nature',name:'Three Bridges',cn:'天生三桥',area:'우롱',date:'08.26',duration:'2–3 hr',search:'天生三桥 武隆',map:'天生三桥 武隆',summary:'우롱 대표 명소. 거대한 천연 석교와 영화 같은 풍경이 특징입니다.',highlights:['거대한 석교 지형','우롱 대표 포인트','걷는 구간이 많음'],tips:['오후 메인 일정으로 배정','운동화 필수'],photo:'https://loremflickr.com/960/720/canyon,bridge,nature?lock=105'},
+  fairymountain:{kind:'Nature',name:'Fairy Mountain',cn:'仙女山',area:'우롱',date:'08.27',duration:'1.5–2 hr',search:'仙女山 国家森林公园',map:'仙女山 国家森林公园',summary:'넓은 초원과 삼림이 있는 우롱의 고원 지대. 아침 산책 코스로 적당합니다.',highlights:['시원한 고원 분위기','초원·삼림 풍경'],tips:['아침 일찍 가면 비교적 쾌적함'],photo:'https://loremflickr.com/960/720/mountain,meadow?lock=106'},
+  longshuixia:{kind:'Nature',name:'Longshuixia Rift',cn:'龙水峡地缝',area:'우롱',date:'08.27',duration:'1.5–2 hr',search:'龙水峡地缝 武隆',map:'龙水峡地缝 武隆',summary:'깊은 협곡 사이를 걷는 코스. 계단과 젖은 바닥이 있어 미끄럼 주의가 필요합니다.',highlights:['깊은 협곡 풍경','우롱 대표 협곡 코스'],tips:['선녀산 후 방문 추천','우비나 미끄럼 주의'],photo:'https://loremflickr.com/960/720/canyon,waterfall?lock=107'},
+  guanyinqiao:{kind:'District',name:'Guanyinqiao',cn:'观音桥',area:'충칭 시내',date:'08.27',duration:'2–3 hr',search:'观音桥步行街',map:'观音桥步行街 重庆',summary:'젊은 상권과 쇼핑, 식당이 모인 번화가. 카오위 저녁과 잘 어울립니다.',highlights:['쇼핑몰·상권','야간 분위기'],tips:['북창문창거리와 함께 보기 좋음'],photo:'https://loremflickr.com/960/720/shopping,city,night?lock=108'},
+  jiujie:{kind:'Night Area',name:'Jiujie',cn:'九街',area:'충칭 시내',date:'08.27',duration:'1–2 hr',search:'九街 重庆',map:'九街 重庆',summary:'관음교 권역의 밤거리. 늦게까지 활기가 남는 편입니다.',highlights:['심야 상권','술집·야식'],tips:['체력 남으면 옵션으로 방문'],photo:'https://loremflickr.com/960/720/nightlife,street?lock=109'},
+  luohansi:{kind:'Temple',name:'Luohansi',cn:'罗汉寺',area:'충칭 시내',date:'08.28',duration:'30–45 min',search:'罗汉寺 重庆',map:'罗汉寺 重庆',summary:'도심 속 사찰. 아침에 비교적 조용하게 보기 좋습니다.',highlights:['짧게 보기 좋은 사찰','도심 속 분위기 전환'],tips:['이른 아침 방문 추천'],photo:'https://loremflickr.com/960/720/temple,china?lock=110'},
+  ciqikou:{kind:'Old Town',name:'Ciqikou',cn:'磁器口古镇',area:'충칭 시내',date:'08.28',duration:'1–1.5 hr',search:'磁器口古镇',map:'磁器口古镇 重庆',summary:'오래된 골목과 간식, 기념품 가게가 모여 있는 고진. 천마화 쇼핑에 좋습니다.',highlights:['기념품·간식 쇼핑','골목 산책'],tips:['너무 오래 있지 말고 핵심만 보기'],photo:'https://loremflickr.com/960/720/oldtown,china?lock=111'},
+  liziba:{kind:'Photo Spot',name:'Liziba',cn:'李子坝',area:'충칭 시내',date:'08.28',duration:'30–40 min',search:'李子坝观景平台',map:'李子坝观景平台 重庆',summary:'건물을 통과하는 경전철로 유명한 포토 스폿.',highlights:['모노레일 사진','짧게 보기 좋음'],tips:['맞은편 플랫폼에서 사진 찍기'],photo:'https://loremflickr.com/960/720/train,city?lock=112'},
+  ering:{kind:'Creative Park',name:'Eling No.2',cn:'鹅岭二厂',area:'충칭 시내',date:'08.28',duration:'1 hr',search:'鹅岭二厂',map:'鹅岭二厂 重庆',summary:'옛 공장을 개조한 문창공간. 카페 쉬기 좋고 사진 찍기 좋습니다.',highlights:['카페·소품샵','문창 감성'],tips:['리즈바와 함께 묶기 좋음'],photo:'https://loremflickr.com/960/720/cafe,creative,industrial?lock=113'},
+  shibati:{kind:'Old Street',name:'Shibati',cn:'十八梯',area:'충칭 시내',date:'08.28',duration:'45–60 min',search:'十八梯传统风貌区',map:'十八梯传统风貌区 重庆',summary:'충칭의 계단형 구도심 풍경을 보기 좋은 곳.',highlights:['계단 골목','야간 산책'],tips:['늦은 오후 방문 추천'],photo:'https://loremflickr.com/960/720/oldstreet,stairs?lock=114'},
+  xiahao:{kind:'Old Street',name:'Xiahaoli',cn:'下浩里',area:'충칭 시내',date:'08.28',duration:'1–1.5 hr',search:'下浩里老街',map:'下浩里老街 重庆',summary:'남안구의 오래된 산비탈 거리. 해질 무렵 분위기가 좋습니다.',highlights:['골목·계단 풍경','야경 전 산책'],tips:['룽먼하오와 이어보기 좋음'],photo:'https://loremflickr.com/960/720/oldstreet,night?lock=115'}
 };
 const FOODS={
- milk:{name:'밀크티',cn:'奶茶',date:'8/25 · 8/27',kind:'DRINK',summary:'더운 날 이동 중 쉬어가기 좋은 음료입니다.',order:['三分糖 = 당도 30%','少冰 = 얼음 적게','珍珠 = 펄 추가'],tips:['해방비 또는 관음교에서'],search:'奶茶'},
- lamb:{name:'우롱 양고기',cn:'碗碗羊肉 / 羊肉汤锅',date:'8/26',kind:'WULONG FOOD',summary:'우롱에서 먹기 좋은 지역색 있는 저녁 메뉴입니다.',order:['碗碗羊肉 = 완완양러우','羊肉汤锅 = 양고기 전골'],tips:['천생삼교 관람 후 저녁'],search:'碗碗羊肉'},
- grilledfish:{name:'카오위',cn:'烤鱼',date:'8/27',kind:'DINNER',summary:'구운 생선을 매운 양념과 채소에 끓여 먹는 메뉴입니다.',order:['麻辣 = 마라맛','蒜香 = 마늘향','微辣 = 약간 매움'],tips:['관음교에서 메인 저녁으로'],search:'烤鱼'},
- dimsum:{name:'딤섬',cn:'港式点心',date:'8/28',kind:'BREAKFAST',summary:'매운 음식 사이에 넣기 좋은 홍콩식 아침 메뉴입니다.',order:['虾饺皇 = 하가우','烧卖 = 샤오마이','肠粉 = 창펀','流沙包 = 류사바오'],tips:['나한사 전후 아침 식사'],search:'港式点心'},
- xiaomian:{name:'샤오몐',cn:'重庆小面',date:'8/29',kind:'BREAKFAST',summary:'충칭 대표 면요리입니다.',order:['小面 = 기본 면','少辣 = 덜 맵게'],tips:['공항 가기 전 마지막 아침'],search:'重庆小面'},
- crayfish:{name:'마라롱샤',cn:'麻辣小龙虾',date:'8/28',kind:'LATE DINNER',summary:'매운 양념의 민물가재 요리입니다.',order:['麻辣小龙虾 = 마라','蒜蓉小龙虾 = 마늘','十三香小龙虾 = 향신료'],tips:['마라 + 마늘 반반 추천'],search:'小龙虾'},
- mahua:{name:'천마화',cn:'陈麻花',date:'8/28 · 자기구',kind:'SNACK',summary:'자기구에서 사기 좋은 바삭한 꽈배기형 과자입니다.',order:['椒盐 = 소금·향신료','麻辣椒盐 = 마라','冰糖糯米 = 달콤한 맛'],tips:['소포장으로 여러 맛'],search:'陈麻花'},
- pepperlatte:{name:'화자오 라테',cn:'花椒拿铁',date:'8/28 · 샤하오리',kind:'CAFE',summary:'화자오 향을 더한 이색 커피입니다.',order:['花椒拿铁'],tips:['샤하오리 산책 중 카페가 당기면'],search:'花椒拿铁'}
+  milktea:{kind:'Drink',name:'Milk Tea',cn:'奶茶',date:'08.25',duration:'10 min',search:'奶茶 少糖 少冰',map:'奶茶 重庆',summary:'첫날 해방비에서 한 잔. 주문할 때는 당도와 얼음을 같이 말하면 편합니다.',order:['三分糖 = 30% 당도','少冰 = 얼음 적게','珍珠 = 펄 추가'],tips:['더우면 첫 잔으로 좋음'],photo:'https://loremflickr.com/960/720/milk-tea?lock=201'},
+  yangrou:{kind:'Dinner',name:'Wulong Lamb',cn:'碗碗羊肉 / 羊肉汤',date:'08.26',duration:'1 hr',search:'羊肉汤 武隆',map:'羊肉汤 武隆',summary:'우롱에서 먹는 지역식 저녁. 뜨끈하고 든든한 편입니다.',order:['양고기탕 또는 양고기 볶음','밥이나 면 추가 가능'],tips:['천생삼교 후 저녁으로 무난함'],photo:'https://loremflickr.com/960/720/lamb,soup?lock=202'},
+  kaoyu:{kind:'Dinner',name:'Kao Yu',cn:'烤鱼',date:'08.27',duration:'1–1.5 hr',search:'烤匠麻辣烤鱼 观音桥',map:'烤匠麻辣烤鱼 观音桥',summary:'생선을 구운 뒤 육수와 함께 내는 충칭식 카오위. 둘이 먹기 좋습니다.',order:['麻辣烤鱼 또는 豆花烤鱼','채소 추가 가능','맵기 微辣 가능'],tips:['관음교 저녁 메인 메뉴로 추천'],photo:'https://loremflickr.com/960/720/grilled-fish,food?lock=203'},
+  xiaomian:{kind:'Noodle',name:'Xiao Mian',cn:'重庆小面',date:'08.28 / 08.29',duration:'20–30 min',search:'重庆小面',map:'重庆小面 重庆',summary:'충칭식 매운 면. 점심이나 출국 전 간단한 식사로 좋습니다.',order:['기본 샤오몐','맵기 조절 가능'],tips:['땅콩·파 향이 강할 수 있음'],photo:'https://loremflickr.com/960/720/noodles,china?lock=204'},
+  xiaolongxia:{kind:'Late Night',name:'Mala Crayfish',cn:'麻辣小龙虾',date:'08.28',duration:'1–1.5 hr',search:'麻辣小龙虾 解放碑',map:'麻辣小龙虾 重庆',summary:'마라 양념 가재. 밤에 맥주와 함께 먹기 좋습니다.',order:['麻辣味 + 蒜蓉味 반반','장갑·물티슈 준비'],tips:['맵기 부담되면 蒜蓉味 섞기'],photo:'https://loremflickr.com/960/720/crayfish,food?lock=205'},
+  dimsum:{kind:'Brunch',name:'Dim Sum',cn:'点心 / 虾饺 / 烧卖',date:'옵션',duration:'45–60 min',search:'港式点心 解放碑',map:'港式点心 重庆',summary:'하가우, 샤오마이, 창펀을 가볍게 먹는 홍콩식 브런치 옵션.',order:['虾饺皇','烧卖','肠粉','流沙包'],tips:['오전 식사 옵션으로 좋음'],photo:'https://loremflickr.com/960/720/dim-sum?lock=206'}
 };
-const DAYS=[
- {date:'08.25',dow:'TUE',name:'FIRST NIGHT',place:'CHONGQING · Fandiao Meiju',events:[['12:15','인천 → 칭다오','칭다오 환승'],['15:10','칭다오 → 충칭','18:05 CKG 도착'],['19:30','Fandiao Meiju 체크인','해방비 근처'],['20:00','해방비','저녁 산책','spot','jiefangbei'],['20:30','바이이 하오츠제','간식 + 밀크티','spot','bayi'],['21:20','쿠이싱러우 · 다이자샹','홍야동으로 이동','spot','kuixinglou'],['22:00','홍야동','야경','spot','hongyadong']]},
- {date:'08.26',dow:'WED',name:'WULONG DAY 1',place:'CHONGQING → WULONG',events:[['08:00','아침 식사','간단하게'],['09:00','대한민국 임시정부 청사','약 1시간','spot','provisional'],['10:15','짐 회수 → 충칭동역','重庆东 → 武隆南'],['PM','우롱 이동 · 체크인','숙소에 짐 보관'],['14:00','천생삼교','2–3시간','spot','tiansheng'],['18:00','우롱 양고기','완완양러우 또는 탕궈','food','lamb']]},
- {date:'08.27',dow:'THU',name:'WULONG → CITY',place:'WULONG → Fandiao Apartment',events:[['07:30','선녀산','초원 · 삼림','spot','fairy'],['10:30','용수협지봉','협곡 트레킹','spot','longshui'],['PM','우롱남 → 충칭동','충칭 복귀 · 체크인'],['19:00','관음교','쇼핑 · 산책','spot','guanyinqiao'],['19:40','북창','문창거리','spot','beicang'],['20:30','카오위','메인 저녁','food','grilledfish'],['22:00','구가','야식 · 심야 상권','spot','jiujie']]},
- {date:'08.28',dow:'FRI',name:'CITY WALK',place:'CHONGQING · FULL DAY',events:[['08:00','나한사','도심 사찰','spot','luohansi'],['09:00','딤섬','홍콩식 아침','food','dimsum'],['10:30','자기구고진','골목 · 기념품','spot','ciqikou'],['12:40','리즈바역','모노레일 전망','spot','liziba'],['13:30','어링얼창','카페 · 사진','spot','elingfactory'],['15:30','호텔 휴식','Fandiao Apartment'],['17:30','십팔제','구도심 산책','spot','shibati'],['19:00','샤하오리 → 룽먼하오','해질 무렵 · 야경','spot','xiahao'],['21:30','마라롱샤','늦은 저녁','food','crayfish']]},
- {date:'08.29',dow:'SAT',name:'HOMEBOUND',place:'CHONGQING → JINAN → INCHEON',events:[['08:30','샤오몐','마지막 아침','food','xiaomian'],['10:00','공항 이동','13:30 CKG 출발'],['15:45','지난 도착','공항 환승'],['16:20','산둥 음식 · 카페','把子肉 있으면 도전'],['18:00','국제선 출국 절차','게이트 이동'],['20:10','지난 → 인천','22:40 도착']]}
+const BOOKINGS=[
+  {type:'Flight',title:'ICN → TAO → CKG',color:'color-red',meta:['08.25 12:15–12:50 인천→칭다오','15:10–18:05 칭다오→충칭'],note:'칭다오 경유 · 위탁수하물 없음',code:'DAY 01'},
+  {type:'Train',title:'CKG East → Wulong South',color:'color-yellow',meta:['08.26 고속철 이동','11:46 출발 기준으로 계획'],note:'역명은 武隆南 확인',code:'DAY 02'},
+  {type:'Hotel',title:'Fandiao Meiju',color:'color-blue',meta:['08.25–08.26 1박','충칭 첫 숙소'],note:'지에팡베이 인근',code:'HOTEL 1'},
+  {type:'Hotel',title:'Wulong Stay',color:'color-lav',meta:['08.26–08.27 1박','우롱 숙소'],note:'천생삼교·선녀산 이동 고려',code:'HOTEL 2'},
+  {type:'Hotel',title:'Fandiao Apartment',color:'color-pink',meta:['08.27–08.29 2박','충칭 복귀 숙소'],note:'외국인 숙박등록 가능 여부 확인',code:'HOTEL 3'},
+  {type:'Ticket',title:'Wulong Scenic Tickets',color:'color-mint',meta:['천생삼교','용수협지봉','선녀산'],note:'공연 제외 버전',code:'TICKET'},
+  {type:'Flight',title:'CKG → TNA → ICN',color:'color-sand',meta:['08.29 13:30–15:45 충칭→지난','20:10–22:40 지난→인천'],note:'지난 공항 환승 4시간 25분',code:'DAY 05'}
+];
+const MAYBE=[
+  {type:'Spot',title:'Beicang Creative Zone',cn:'北仓文创街区',why:'관음교와 붙여 보기 좋은 카페·문창 구역',when:'8/27 밤'},
+  {type:'Spot',title:'Kuixinglou',cn:'魁星楼',why:'해방비·홍야동 사이 짧게 끼우기 좋은 포인트',when:'8/25 밤'},
+  {type:'Spot',title:'Longmenhao',cn:'龙门浩老街',why:'샤하오리와 이어서 야경 보기 좋은 거리',when:'8/28 저녁'},
+  {type:'Food',title:'Air-raid Hotpot',cn:'防空洞火锅',why:'방공호 훠궈. 일정이 너무 빡빡하지 않으면 후보',when:'충칭 시내 여유 생길 때'},
+  {type:'Food',title:'Chen Mahua',cn:'陈麻花',why:'자기구고진 기념품 과자',when:'8/28 오전'}
 ];
 const PHRASES=[
  ['한국 여권으로 숙박 가능한가요?','韩国护照可以入住吗？'],
  ['외국인 숙박등록 가능한가요?','可以办理外国人住宿登记吗？'],
  ['체크인하고 싶어요.','我想办理入住。'],
+ ['체크아웃하고 싶어요.','我想办理退房。'],
  ['짐을 잠시 맡아주실 수 있나요?','可以帮我寄存一下行李吗？'],
- ['이곳으로 가주세요.','请带我去这里。'],
+ ['이 주소로 가주세요.','请带我去这个地址。'],
  ['여기서 내려주세요.','请在这里停车。'],
  ['우롱남역 맞나요?','是武隆南站吗？'],
  ['이 장소가 어디예요?','这个地方在哪里？'],
  ['여기까지 어떻게 가나요?','去这里怎么走？'],
  ['고덕지도에서 이 이름을 검색해주세요.','请在高德地图搜索这个名字。'],
- ['이거 얼마예요?','这个多少钱？'],
- ['알리페이로 결제할 수 있나요?','可以用支付宝吗？'],
- ['계산할게요.','买单，谢谢。'],
- ['영수증 주세요.','请给我小票。'],
+ ['두 명이에요.','两位。'],
+ ['예약했어요.','我有预约。'],
  ['추천 메뉴가 뭐예요?','有什么推荐菜？'],
  ['덜 맵게 해주세요.','请少辣一点。'],
  ['맵지 않게 해주세요.','请不要辣。'],
  ['마라맛과 마늘맛 반반 가능한가요?','麻辣和蒜蓉可以各来一半吗？'],
- ['설탕 30%, 얼음 적게요.','三分糖，少冰。'],
  ['포장해 주세요.','请帮我打包。'],
  ['물 한 병 주세요.','请给我一瓶水。'],
+ ['이거 얼마예요?','这个多少钱？'],
+ ['조금 깎아주실 수 있나요?','可以便宜一点吗？'],
+ ['계산할게요.','买单，谢谢。'],
+ ['영수증 주세요.','请给我小票。'],
+ ['알리페이로 결제할 수 있나요?','可以用支付宝吗？'],
+ ['카드도 되나요?','可以刷卡吗？'],
  ['화장실이 어디예요?','洗手间在哪里？'],
  ['사진 찍어주실 수 있나요?','可以帮我们拍张照片吗？'],
- ['두 명이에요.','两位。'],
- ['예약했어요.','我有预约。']
-]
-const CHECKS=['여권 유효기간 확인','Alipay 해외카드 등록·본인인증','WeChat 결제수단 준비','12306 로그인 및 실명인증','重庆东 ↔ 武隆南 왕복 고속철 예약','우롱 숙소 위치 확정','Fandiao Apartment 외국인 숙박등록 확인','천생삼교·용수협지봉·선녀산 입장권 확인','두 숙소 중국어 주소·전화번호 저장','고덕지도 주요 장소 즐겨찾기','보조배터리·우산·우비·운동화 준비','현금 비상용 준비','칭다오·지난 환승 동선 확인'];
-const STORE='cqTripV7';let state={};try{state=JSON.parse(localStorage.getItem(STORE)||localStorage.getItem('cqTripV6')||'{}')}catch(e){}
+ ['좀 더 천천히 말씀해 주세요.','请说慢一点。'],
+ ['인터넷 비밀번호가 뭐예요?','Wi-Fi密码是什么？'],
+ ['도와주세요.','请帮帮我。']
+];
+const CHECKS=['여권 유효기간 확인','Alipay 해외카드 등록·본인인증','WeChat 결제수단 준비','12306 로그인 및 실명인증','충칭동 ↔ 우롱남 왕복 고속철 예약','우롱 숙소 위치 확정','Fandiao Apartment 외국인 숙박등록 확인','우롱 입장권 확인','두 숙소 중국어 주소 저장','고덕지도 즐겨찾기 저장','보조배터리·우산·우비·운동화 준비','현금 비상용 준비','칭다오·지난 환승 동선 확인'];
+const STORE='cqTripV8';
+let state={base:1800,shop:250,expenseNote:'',splitItems:[],freeNote:'',visitedSpots:{},visitedFoods:{}};
+try{state={...state,...JSON.parse(localStorage.getItem(STORE)||localStorage.getItem('cqTripV7')||localStorage.getItem('cqTripV6')||'{}')}}catch(e){}
 const save=()=>localStorage.setItem(STORE,JSON.stringify(state));
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-const color=i=>C[i%C.length];
-function toast(msg='COPIED'){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__t);window.__t=setTimeout(()=>t.classList.remove('show'),900)}
-async function copyText(s){try{await navigator.clipboard.writeText(s);toast()}catch(e){toast('LONG PRESS TO COPY')}}
-function nav(current){const items=[['plan','◷','Plan'],['spots','⌖','Spots'],['eat','✦','Eat'],['money','¥','Money'],['talk','中','Talk'],['check','✓','Check']];document.getElementById('bottomNav').innerHTML=items.map(([id,ic,lab])=>`<button class="nav ${current===id?'active':''}" onclick="go('${id}')"><i>${ic}</i>${lab}</button>`).join('')}
+const color=i=>COLORS[(i%COLORS.length+COLORS.length)%COLORS.length];
+const mask=i=>MASKS[(i%MASKS.length+MASKS.length)%MASKS.length];
+function toast(msg='COPIED'){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__tt);window.__tt=setTimeout(()=>t.classList.remove('show'),950)}
+async function copyText(v){try{await navigator.clipboard.writeText(v);toast()}catch(e){toast('LONG PRESS TO COPY')}}
+function nav(current){const items=[['today','◎','Today'],['plan','◷','Plan'],['spots','⌖','Spots'],['eat','✦','Eat'],['book','✈','Book'],['money','¥','Money'],['talk','中','Talk'],['check','✓','Check'],['maybe','★','Maybe']];
+  document.getElementById('bottomNav').innerHTML=items.map(([id,icon,label])=>`<button class="nav-btn ${current===id?'active':''}" onclick="go('${id}')"><i>${icon}</i><span class="nav-label">${label}</span></button>`).join('');
+}
 function show(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
 function go(id){location.hash=id}
-function openDetail(type,id,from){location.hash=`detail/${type}/${id}/${from||type==='food'?'eat':'spots'}`}
-function renderPlan(){document.getElementById('plan').innerHTML=`<div class="top"><div class="kicker">CHONGQING · WULONG · AUG 25–29</div><h1>CHONGQING<br>CITY</h1><div class="pills"><span class="pill">2 PEOPLE</span><span class="pill">4 NIGHTS · 5 DAYS</span><span class="pill">CITY + WULONG</span></div><div class="hero"><small>Main route</small><strong>City → Wulong → City</strong><p>일정 속 장소·음식을 누르면 상세 정보가 열립니다.</p></div></div><div class="day-stack">${DAYS.map((d,i)=>`<article class="day-card ${color(i)}"><div class="day-head"><div><div class="day-no">DAY ${String(i+1).padStart(2,'0')}</div><div class="day-name">${d.name}</div><div class="day-place">${d.place}</div></div><div class="datebox"><b>${d.date}</b><span>${d.dow}</span></div></div><div class="events">${d.events.map(e=>{const [time,title,sub,type,id]=e;return type?`<button class="event clickable" onclick="openDetail('${type}','${id}','plan')"><div class="time">${time}</div><div><div class="etitle">${title}</div><div class="esub">${sub||''}</div></div></button>`:`<div class="event"><div class="time">${time}</div><div><div class="etitle">${title}</div><div class="esub">${sub||''}</div></div></div>`}).join('')}</div></article>`).join('')}</div>`}
-function renderSpots(filter='ALL'){const entries=Object.entries(SPOTS).filter(([,v])=>filter==='ALL'||(filter==='WULONG'?v.area.startsWith('우롱'):!v.area.startsWith('우롱')));document.getElementById('spots').innerHTML=`<header class="pagehead"><div class="kicker">Places</div><h1>SPOTS</h1><p class="sub">일정에 들어간 장소 모음입니다.</p></header><div class="filters">${['ALL','CHONGQING','WULONG'].map(f=>`<button class="filter ${filter===f?'active':''}" onclick="renderSpots('${f}')">${f}</button>`).join('')}</div><div class="grid">${entries.map(([id,v],i)=>`<button class="tile ${color(i+1)}" onclick="openDetail('spot','${id}','spots')"><span class="tag">${v.kind}</span><div class="tname">${v.name}</div><div class="tcn">${v.cn}<br>${v.area}</div><div class="tdate">${v.date}</div><div class="arrow">→</div></button>`).join('')}</div>`}
-function renderEat(){document.getElementById('eat').innerHTML=`<header class="pagehead"><div class="kicker">Food & Drink</div><h1>EAT</h1><p class="sub">먹고 싶은 메뉴와 주문용 표현 정리입니다.</p></header><div class="grid">${Object.entries(FOODS).map(([id,v],i)=>`<button class="tile ${color(i+2)}" onclick="openDetail('food','${id}','eat')"><span class="tag">${v.kind}</span><div class="tname">${v.name}</div><div class="tcn">${v.cn}</div><div class="tdate">${v.date}</div><div class="arrow">→</div></button>`).join('')}</div>`}
-function renderMoney(){document.getElementById('money').innerHTML=`<header class="pagehead"><div class="kicker">Budget · 2 people</div><h1>MONEY</h1></header><div class="moneyhero"><div class="label">Total local budget</div><div class="num" id="moneyTotal">0 <small>CNY</small></div><div style="font-size:12px;color:rgba(255,255,255,.68)">항공·숙소 제외</div></div><div class="inputs"><div class="inputcard c1"><label>Base / person</label><input id="base" inputmode="numeric" value="${state.base??1800}"></div><div class="inputcard c2"><label>Shopping / person</label><input id="shop" inputmode="numeric" value="${state.shop??250}"></div></div><div class="info-list"><div class="info c3"><span>우롱 관광지 · 공연 제외</span><b>≈ 310 / 인</b></div><div class="info c4"><span>충칭↔우롱 고속철</span><b>≈ 150 / 인</b></div><div class="info c5"><span>식비·간식</span><b>≈ 600–800 / 인</b></div><div class="info c6"><span>교통·디디</span><b>≈ 180–300 / 인</b></div></div><div class="note"><label>Expense notes</label><textarea id="expenseNote" placeholder="8/27 카오위 186위안 / 둘이 반반">${esc(state.expenseNote||'')}</textarea></div>`;const b=document.getElementById('base'),s=document.getElementById('shop'),n=document.getElementById('expenseNote');const calc=()=>{state.base=Number(b.value||0);state.shop=Number(s.value||0);save();document.getElementById('moneyTotal').innerHTML=`${((state.base+state.shop)*2).toLocaleString()} <small>CNY</small>`};b.oninput=calc;s.oninput=calc;n.oninput=()=>{state.expenseNote=n.value;save()};calc()}
-function renderTalk(){document.getElementById('talk').innerHTML=`<header class="pagehead"><div class="kicker">Useful Chinese</div><h1>TALK</h1><p class="sub">복사해서 보여주면 됩니다.</p></header><div class="talkgrid">${PHRASES.map(([ko,zh],i)=>`<div class="chat ${color(i+2)}"><div class="ko">${ko}</div><div class="zh">${zh}</div><button class="copybtn" onclick="copyText('${esc(zh)}')">COPY</button></div>`).join('')}</div>`}
-function renderCheck(){document.getElementById('check').innerHTML=`<header class="pagehead"><div class="kicker">Before departure</div><h1>CHECK</h1></header><div class="checkgrid">${CHECKS.map((x,i)=>`<label class="check ${state['c'+i]?'done':''} ${i%2?color(i+3):''}" id="check${i}"><input type="checkbox" ${state['c'+i]?'checked':''} onchange="toggleCheck(${i},this.checked)"><span class="ctext">${x}</span></label>`).join('')}</div><div class="note"><label>Notes</label><textarea id="freeNote" placeholder="예약번호, 숙소 주소, 살 것">${esc(state.freeNote||'')}</textarea></div>`;document.getElementById('freeNote').oninput=e=>{state.freeNote=e.target.value;save()}}
-function toggleCheck(i,v){state['c'+i]=v;save();document.getElementById('check'+i).classList.toggle('done',v)}
-function renderDetail(type,id,from){const obj=type==='food'?FOODS[id]:SPOTS[id];if(!obj){go('plan');return}const idx=Object.keys(type==='food'?FOODS:SPOTS).indexOf(id);const bullets=type==='food'?obj.order:obj.highlights;const photo=photoFor(type,id);document.getElementById('detail').innerHTML=`<div class="detailwrap"><button class="back" onclick="go('${from||'plan'}')">← BACK</button><div class="detailposter ${color(idx+2)}"><div class="detailposter-top"><div><div class="dtype">${obj.kind}</div><div class="dname">${obj.name}</div><div class="dcn">${obj.cn}</div><div class="dtags"><span>${obj.date}</span>${obj.area?`<span>${obj.area}</span>`:''}${obj.duration?`<span>${obj.duration}</span>`:''}</div></div><div><div class="detailphoto-wrap"><div class="detailphoto-shape"><img class="detailphoto" src="${photo}" alt="${obj.name} 대표 이미지" loading="eager" referrerpolicy="no-referrer" onerror="this.style.display='none';this.parentElement.classList.add('fallback')"></div></div><div class="detailcaption">${obj.name}</div></div></div></div><section class="section"><h2>About</h2><p>${obj.summary}</p></section><section class="section"><h2>${type==='food'?'Order':'Highlights'}</h2><ul>${(bullets||[]).map(x=>`<li>${x}</li>`).join('')}</ul></section><section class="section"><h2>Note</h2><ul>${(obj.tips||[]).map(x=>`<li>${x}</li>`).join('')}</ul></section><div class="actions"><button class="action" onclick="copyText('${esc(obj.search||obj.cn)}')">검색어 복사</button><button class="action" onclick="copyText('${esc(obj.cn)}')">중국어명 복사</button></div></div>`}
-function route(){const h=(location.hash||'#plan').slice(1);const parts=h.split('/');if(parts[0]==='detail'){renderDetail(parts[1],parts[2],parts[3]);show('detail');nav(parts[3]||'plan');return}const page=['plan','spots','eat','money','talk','check'].includes(parts[0])?parts[0]:'plan';if(page==='plan')renderPlan();if(page==='spots')renderSpots();if(page==='eat')renderEat();if(page==='money')renderMoney();if(page==='talk')renderTalk();if(page==='check')renderCheck();show(page);nav(page)}
-window.addEventListener('hashchange',route);route();
-if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(r=>r.update()).catch(()=>{}));
+function openDetail(type,id,from){location.hash=`detail/${type}/${id}/${from||'plan'}`}
+function toggleVisited(type,id){const key=type==='spot'?'visitedSpots':'visitedFoods';state[key]=state[key]||{};state[key][id]=!state[key][id];save();route()}
+function isVisited(type,id){const key=type==='spot'?'visitedSpots':'visitedFoods';return !!(state[key]&&state[key][id])}
+function mapLinks(query){const q=encodeURIComponent(query);return {apple:`https://maps.apple.com/?q=${q}`,amap:`https://uri.amap.com/search?keyword=${q}`}}
+function getTodayData(){const now=new Date();const start=new Date('2026-08-25T00:00:00');const end=new Date('2026-08-29T23:59:59');
+  if(now < start){const diff=Math.ceil((start-now)/(1000*60*60*24));return {mode:'countdown',label:`D-${diff}`,title:'Trip Coming',day:DAYS[0],subtitle:'여행 전 준비 단계'};}
+  if(now > end){return {mode:'done',label:'DONE',title:'Trip Finished',day:DAYS[DAYS.length-1],subtitle:'여행 종료'};}
+  const idx=Math.min(DAYS.length-1,Math.max(0,Math.floor((new Date(now.getFullYear(),now.getMonth(),now.getDate())-new Date(2026,7,25))/(1000*60*60*24))));
+  return {mode:'during',label:`DAY ${idx+1}`,title:DAYS[idx].name,day:DAYS[idx],subtitle:DAYS[idx].place};
+}
+function renderToday(){const t=getTodayData();const day=t.day;const nextSpot=day.events.find(e=>e[3]==='spot');const nextFood=day.events.find(e=>e[3]==='food');
+ document.getElementById('today').innerHTML=`<div class="page-top"><div class="kicker">Live view</div><h1 class="hero-title en-title">TODAY</h1><p class="hero-sub">오늘 볼 일정과 필요한 화면으로 바로 이동합니다.</p></div><div class="today-hero"><div class="today-card ${t.mode==='during'?'color-red':'color-black'}"><div class="tiny">Status</div><div class="big-num">${t.label}</div><div class="big-title">${t.title}</div><div class="info">${t.subtitle}<br>${day.date} · ${day.dow} · ${day.sleep}</div></div><div class="today-card color-white"><div class="tiny">Next up</div><div class="big-title">${(nextSpot||day.events[0])[1]}</div><div class="info">${(nextSpot||day.events[0])[0]} · ${(nextSpot||day.events[0])[2]||''}<br>Food: ${nextFood?nextFood[1]:day.food}</div><div class="action-row"><button class="action-btn light" onclick="go('plan')">Open plan</button><button class="action-btn light" onclick="go('book')">Open bookings</button></div></div></div><div class="quick-links"><button class="quick-btn color-yellow" onclick="go('book')"><div class="mini-title">Travel</div><strong class="en-title">BOOKINGS</strong><p>항공·숙소·기차 보기</p></button><button class="quick-btn color-blue" onclick="go('talk')"><div class="mini-title">Useful</div><strong class="en-title">TALK</strong><p>중국어 표현 바로 복사</p></button><button class="quick-btn color-pink" onclick="go('money')"><div class="mini-title">Budget</div><strong class="en-title">SPLIT</strong><p>공동지출·정산 확인</p></button><button class="quick-btn color-mint" onclick="go('maybe')"><div class="mini-title">Options</div><strong class="en-title">MAYBE</strong><p>후보 장소·식당 보기</p></button></div><div class="banner"><small>Today route</small><strong>${day.name}</strong><p>${day.events.map(e=>`${e[0]} ${e[1]}`).join(' · ')}</p></div>`;
+}
+function renderPlan(){document.getElementById('plan').innerHTML=`<div class="page-top"><div class="kicker">Chongqing · Wulong · Aug 25–29</div><h1 class="hero-title en-title">CHONGQING<br>CITY</h1><div class="pills"><span class="pill">2 PEOPLE</span><span class="pill">4 NIGHTS · 5 DAYS</span><span class="pill">CITY + WULONG</span></div><div class="banner"><small>Main route</small><strong>City → Wulong → City</strong><p>일정 속 장소와 음식은 눌러서 상세 정보를 볼 수 있습니다.</p></div></div><div class="grid day-grid">${DAYS.map((d,i)=>`<article class="card day-card ${color(i)}"><div class="head"><div><div class="day-no en-title">DAY ${String(i+1).padStart(2,'0')}</div><div class="day-title en-title">${d.name}</div><div class="day-place">${d.place}</div></div><div class="date-box"><b>${d.date}</b><span>${d.dow}</span></div></div><div class="events">${d.events.map(e=>{const [time,title,sub,type,id]=e;return type?`<button class="event clickable" onclick="openDetail('${type}','${id}','plan')"><div class="time">${time}</div><div><div class="title">${title}</div><div class="sub">${sub||''}</div></div></button>`:`<div class="event"><div class="time">${time}</div><div><div class="title">${title}</div><div class="sub">${sub||''}</div></div></div>`}).join('')}</div></article>`).join('')}</div>`}
+function renderSpots(filter='ALL'){const entries=Object.entries(SPOTS).filter(([,v])=>filter==='ALL'||(filter==='WULONG'?v.area==='우롱':v.area!=='우롱'));document.getElementById('spots').innerHTML=`<div class="section-top"><div class="kicker">Places</div><h1 class="section-title en-title">SPOTS</h1><p class="section-sub">일정에 들어간 장소 목록.</p></div><div class="filters">${['ALL','CHONGQING','WULONG'].map(f=>`<button class="filter ${filter===f?'active':''}" onclick="renderSpots('${f}')">${f}</button>`).join('')}</div><div class="grid grid-2">${entries.map(([id,v],i)=>`<button class="tile ${color(i+1)}" onclick="openDetail('spot','${id}','spots')"><span class="chip en-title">${v.kind}</span><div class="name en-title">${v.name}</div><div class="caption">${v.cn}<br>${v.area}</div><div class="meta">${v.date}${isVisited('spot',id)?' · VISITED':''}</div><div class="go">→</div></button>`).join('')}</div>`}
+function renderEat(){document.getElementById('eat').innerHTML=`<div class="section-top"><div class="kicker">Food & Drink</div><h1 class="section-title en-title">EAT</h1><p class="section-sub">먹고 싶은 메뉴 정리.</p></div><div class="grid grid-2">${Object.entries(FOODS).map(([id,v],i)=>`<button class="tile ${color(i+2)}" onclick="openDetail('food','${id}','eat')"><span class="chip en-title">${v.kind}</span><div class="name en-title">${v.name}</div><div class="caption">${v.cn}</div><div class="meta">${v.date}${isVisited('food',id)?' · DONE':''}</div><div class="go">→</div></button>`).join('')}</div>`}
+function renderBook(){document.getElementById('book').innerHTML=`<div class="section-top"><div class="kicker">Flights · Trains · Hotels</div><h1 class="section-title en-title">BOOKINGS</h1><p class="section-sub">예약 정보와 이동 메모.</p></div><div class="booking-list">${BOOKINGS.map((b,i)=>`<article class="booking ${b.color||color(i)}"><div class="row"><div><div class="type en-title">${b.type}</div><div class="title en-title">${b.title}</div></div><div class="code en-title">${b.code}</div></div><div class="meta">${b.meta.map(x=>`• ${x}`).join('<br>')}</div><div class="meta" style="margin-top:8px;font-weight:700">${b.note}</div></article>`).join('')}</div>`}
+function calcSplit(){const total=(Number(state.base||0)+Number(state.shop||0))*2;const items=state.splitItems||[];const jy=items.filter(x=>x.payer==='지윤').reduce((a,b)=>a+Number(b.amount||0),0);const bf=items.filter(x=>x.payer==='남자친구').reduce((a,b)=>a+Number(b.amount||0),0);const paidTotal=jy+bf;const half=paidTotal/2;let settlement='아직 정산 없음';if(paidTotal>0){if(jy>half) settlement=`남자친구 → 지윤 ${Math.round((jy-half)*100)/100}元`; else if(bf>half) settlement=`지윤 → 남자친구 ${Math.round((bf-half)*100)/100}元`; else settlement='딱 반반'}return {total,jy,bf,paidTotal,settlement}}
+function addSplit(){const item=document.getElementById('splitItem').value.trim();const amount=Number(document.getElementById('splitAmount').value||0);const payer=document.getElementById('splitPayer').value;if(!item||!amount)return toast('ITEM & AMOUNT');state.splitItems=state.splitItems||[];state.splitItems.unshift({id:Date.now(),item,amount,payer});save();renderMoney();toast('ADDED')}
+function removeSplit(id){state.splitItems=(state.splitItems||[]).filter(x=>x.id!==id);save();renderMoney()}
+function renderMoney(){const split=calcSplit();document.getElementById('money').innerHTML=`<div class="section-top"><div class="kicker">Budget · Couple split</div><h1 class="section-title en-title">MONEY</h1></div><div class="money-total"><div class="tiny">Local budget target</div><div class="num en-title">${split.total.toLocaleString()} <small>CNY</small></div><div style="font-size:12px;color:rgba(255,255,255,.68)">항공·숙소 제외</div></div><div class="input-grid"><div class="input-card color-yellow"><label>Base / person</label><input id="base" inputmode="numeric" value="${state.base||1800}"></div><div class="input-card color-blue"><label>Shopping / person</label><input id="shop" inputmode="numeric" value="${state.shop||250}"></div></div><div class="info-list"><div class="info-chip color-lav"><span>우롱 관광지 · 공연 제외</span><b>≈ 310 / 인</b></div><div class="info-chip color-mint"><span>충칭↔우롱 고속철</span><b>≈ 150 / 인</b></div><div class="info-chip color-pink"><span>현재 공동지출 합계</span><b>${split.paidTotal.toLocaleString()}元</b></div><div class="info-chip color-sand"><span>현재 정산</span><b>${split.settlement}</b></div></div><div class="note-card"><label>Expense notes</label><textarea id="expenseNote" placeholder="8/27 카오위 186위안 / 둘이 반반">${esc(state.expenseNote||'')}</textarea></div><div class="section-top" style="padding-top:18px"><div class="kicker">Split manager</div><h1 class="section-title en-title" style="font-size:32px">SPLIT</h1></div><div class="input-grid"><div class="input-card color-white"><label>Item</label><input id="splitItem" placeholder="카오위" style="font-size:22px;font-family:inherit;font-weight:700"></div><div class="input-card color-white"><label>Amount</label><input id="splitAmount" inputmode="numeric" placeholder="186"></div><div class="input-card select color-white"><label>Payer</label><select id="splitPayer"><option>지윤</option><option>남자친구</option></select></div><div class="input-card color-red" style="display:flex;align-items:flex-end;justify-content:center"><button class="inline-btn" onclick="addSplit()">Add expense</button></div></div><div class="booking-list" style="margin-top:14px"><div class="info-chip color-yellow"><span>지윤 결제</span><b>${split.jy.toLocaleString()}元</b></div><div class="info-chip color-blue"><span>남자친구 결제</span><b>${split.bf.toLocaleString()}元</b></div></div><div class="expense-list">${(state.splitItems||[]).map((x,i)=>`<div class="expense-item ${color(i+1)}"><div class="left"><b>${esc(x.item)}</b><span>${x.payer}</span></div><div class="right"><strong>${Number(x.amount).toLocaleString()}元</strong><button onclick="removeSplit(${x.id})">삭제</button></div></div>`).join('')||'<div class="note-card">아직 입력한 공동지출이 없습니다.</div>'}</div>`;
+ document.getElementById('base').oninput=e=>{state.base=Number(e.target.value||0);save();renderMoney()}; document.getElementById('shop').oninput=e=>{state.shop=Number(e.target.value||0);save();renderMoney()}; document.getElementById('expenseNote').oninput=e=>{state.expenseNote=e.target.value;save()};}
+function renderTalk(){document.getElementById('talk').innerHTML=`<div class="section-top"><div class="kicker">Useful Chinese</div><h1 class="section-title en-title">TALK</h1><p class="section-sub">복사해서 보여주면 됩니다.</p></div><div class="talk-list">${PHRASES.map(([ko,zh],i)=>`<div class="talk-card ${color(i+2)}"><div class="ko">${ko}</div><div class="zh">${zh}</div><button class="inline-btn" onclick="copyText('${esc(zh)}')">Copy</button></div>`).join('')}</div>`}
+function renderCheck(){document.getElementById('check').innerHTML=`<div class="section-top"><div class="kicker">Before departure</div><h1 class="section-title en-title">CHECK</h1></div><div class="check-list">${CHECKS.map((t,i)=>`<label class="task ${state['check'+i]?'done':''}"><input type="checkbox" ${state['check'+i]?'checked':''} onchange="state['check${i}']=this.checked;save();renderCheck()"><span class="txt">${t}</span></label>`).join('')}</div><div class="note-card"><label>Notes</label><textarea id="freeNote" placeholder="예약번호, 숙소 주소, 살 것">${esc(state.freeNote||'')}</textarea></div>`;document.getElementById('freeNote').oninput=e=>{state.freeNote=e.target.value;save()}}
+function renderMaybe(){document.getElementById('maybe').innerHTML=`<div class="section-top"><div class="kicker">Extra options</div><h1 class="section-title en-title">MAYBE</h1><p class="section-sub">시간이 남을 때 넣을 후보들.</p></div><div class="maybe-list">${MAYBE.map((m,i)=>`<article class="maybe-card ${color(i+3)}"><div class="type en-title">${m.type}</div><div class="title en-title">${m.title}</div><div class="sub">${m.cn}<br>${m.why}<br><b>${m.when}</b></div></article>`).join('')}</div>`}
+function renderDetail(type,id,from){const data=type==='food'?FOODS[id]:SPOTS[id];if(!data){go('plan');return}const idx=Object.keys(type==='food'?FOODS:SPOTS).indexOf(id);const links=mapLinks(data.map||data.search||data.cn);const isFood=type==='food';const bullets=isFood?data.order:data.highlights;const visited=isVisited(type,id);
+ document.getElementById('detail').innerHTML=`<div class="detail-top"><button class="back" onclick="go('${from||'plan'}')">← Back</button><div class="detail-card ${color(idx+1)}"><div class="type en-title">${data.kind}</div><div class="name en-title">${data.name}</div><div class="cn">${data.cn}</div><div class="detail-tags"><span>${data.date}</span>${data.area?`<span>${data.area}</span>`:''}${data.duration?`<span>${data.duration}</span>`:''}</div><div class="photo-shell"><div class="photo-frame ${mask(idx)}" id="photoFrame"><img src="${data.photo}" alt="${data.name}" referrerpolicy="no-referrer" onerror="this.remove();document.getElementById('photoFrame').classList.add('fallback');document.getElementById('photoFrame').textContent='PHOTO';"></div><div class="detail-caption">Representative image</div></div></div><div class="action-row"><button class="action-btn light" onclick="toggleVisited('${type}','${id}')">${visited?'표시 해제':'방문 완료'}</button><button class="action-btn" onclick="copyText('${esc(data.cn)}')">중국어명 복사</button><button class="action-btn" onclick="copyText('${esc(data.search||data.cn)}')">검색어 복사</button></div><div class="action-row"><a class="action-btn light" href="${links.apple}" target="_blank" rel="noopener">Apple Maps</a><a class="action-btn light" href="${links.amap}" target="_blank" rel="noopener">Amap</a></div><section class="detail-section"><h3>About</h3><p>${data.summary}</p></section><section class="detail-section"><h3>${isFood?'Order':'Highlights'}</h3><ul>${(bullets||[]).map(x=>`<li>${x}</li>`).join('')}</ul></section><section class="detail-section"><h3>Note</h3><ul>${(data.tips||[]).map(x=>`<li>${x}</li>`).join('')}</ul></section></div>`}
+function route(){const hash=(location.hash||'#today').slice(1);const p=hash.split('/');if(p[0]==='detail'){renderDetail(p[1],p[2],p[3]);show('detail');nav(p[3]||'plan');return}
+  const view=['today','plan','spots','eat','book','money','talk','check','maybe'].includes(p[0])?p[0]:'today';
+  if(view==='today') renderToday();
+  if(view==='plan') renderPlan();
+  if(view==='spots') renderSpots();
+  if(view==='eat') renderEat();
+  if(view==='book') renderBook();
+  if(view==='money') renderMoney();
+  if(view==='talk') renderTalk();
+  if(view==='check') renderCheck();
+  if(view==='maybe') renderMaybe();
+  show(view); nav(view);
+}
+window.addEventListener('hashchange',route); route();
+if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(r=>r.update()).catch(()=>{}));
 </script>
 </body>
 </html>
