@@ -2741,6 +2741,179 @@ i,em{font-style:normal!important}
   }
 }
 
+
+/* v34 — full-screen TODAY / PLAN composition */
+#today,
+#plan{
+  min-height:calc(100svh - 92px)!important;
+  padding-top:calc(12px + env(safe-area-inset-top))!important;
+}
+
+/* no heading remnants */
+#today .page-minimal-head,
+#plan .page-minimal-head,
+#today .clean-head,
+#plan .clean-head{
+  display:none!important;
+}
+
+/* TODAY fills the viewport rather than floating in empty space */
+.today-full{
+  min-height:calc(100svh - 112px - env(safe-area-inset-top))!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-start!important;
+}
+.today-full .snap-rail{
+  flex:1 1 auto!important;
+  min-height:calc(100svh - 170px - env(safe-area-inset-top))!important;
+  align-items:stretch!important;
+}
+.today-full .snap-card,
+.today-full .today-surface-link{
+  min-height:calc(100svh - 174px - env(safe-area-inset-top))!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-start!important;
+  padding-top:24px!important;
+  padding-bottom:24px!important;
+}
+.today-full .snap-card-top{
+  margin-bottom:clamp(28px,7vh,58px)!important;
+}
+.today-full .snap-big{
+  font-size:clamp(44px,12vw,72px)!important;
+  line-height:.9!important;
+}
+.today-full .snap-title{
+  margin-top:12px!important;
+  max-width:90%!important;
+}
+.today-full .snap-sub{
+  margin-top:14px!important;
+  max-width:92%!important;
+  line-height:1.55!important;
+}
+.today-full .snap-foot{
+  margin-top:auto!important;
+  padding-top:18px!important;
+  border-top:1px solid rgba(53,51,47,.16)!important;
+}
+.today-full .snap-footer{
+  flex:0 0 auto!important;
+  padding-top:10px!important;
+  padding-bottom:2px!important;
+}
+
+/* PLAN uses almost the whole screen */
+.plan-full{
+  min-height:calc(100svh - 112px - env(safe-area-inset-top))!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+.plan-full .clean-plan-counter{
+  flex:0 0 auto!important;
+  min-height:28px!important;
+  padding-top:2px!important;
+  padding-bottom:8px!important;
+}
+.plan-full .plan-rail{
+  flex:1 1 auto!important;
+  min-height:calc(100svh - 182px - env(safe-area-inset-top))!important;
+  align-items:stretch!important;
+}
+.plan-full .clean-pass-sheet{
+  min-height:calc(100svh - 184px - env(safe-area-inset-top))!important;
+  display:flex!important;
+  flex-direction:column!important;
+  padding-top:22px!important;
+  padding-bottom:18px!important;
+}
+.plan-full .pass-events{
+  flex:1 1 auto!important;
+}
+.plan-full .pass-event,
+.plan-full .pass-event.static{
+  min-height:54px!important;
+  align-items:center!important;
+}
+.plan-full .pass-bottom{
+  margin-top:auto!important;
+  padding-top:14px!important;
+}
+
+/* controls stay compact at the bottom */
+.plan-full .plan-scroll-track{
+  flex:0 0 auto!important;
+  margin-top:8px!important;
+}
+.plan-full .plan-scroll-controls{
+  flex:0 0 auto!important;
+  padding-top:8px!important;
+  padding-bottom:0!important;
+}
+
+/* slightly wider cards so the screen feels composed, but keep next-card cue */
+.today-full .snap-card,
+.today-full .today-surface-link{
+  flex-basis:min(86vw,560px)!important;
+}
+.plan-full .clean-pass-sheet{
+  flex-basis:min(88vw,590px)!important;
+}
+
+/* tighten leftover whitespace */
+#today .snap-shell,
+#plan .snap-shell{
+  margin-top:0!important;
+}
+#today .snap-rail,
+#plan .snap-rail{
+  margin-top:0!important;
+}
+
+/* preserve nav clearance */
+#today,
+#plan{
+  padding-bottom:18px!important;
+}
+
+@media(max-width:560px){
+  #today,
+  #plan{
+    padding-top:calc(8px + env(safe-area-inset-top))!important;
+  }
+
+  .today-full{
+    min-height:calc(100svh - 106px - env(safe-area-inset-top))!important;
+  }
+  .today-full .snap-rail{
+    min-height:calc(100svh - 158px - env(safe-area-inset-top))!important;
+  }
+  .today-full .snap-card,
+  .today-full .today-surface-link{
+    min-height:calc(100svh - 162px - env(safe-area-inset-top))!important;
+    flex-basis:88vw!important;
+    padding-top:22px!important;
+    padding-bottom:22px!important;
+  }
+
+  .plan-full{
+    min-height:calc(100svh - 106px - env(safe-area-inset-top))!important;
+  }
+  .plan-full .plan-rail{
+    min-height:calc(100svh - 170px - env(safe-area-inset-top))!important;
+  }
+  .plan-full .clean-pass-sheet{
+    min-height:calc(100svh - 172px - env(safe-area-inset-top))!important;
+    flex-basis:90vw!important;
+  }
+
+  .today-full .snap-card-top{
+    margin-bottom:clamp(24px,6vh,44px)!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2928,15 +3101,11 @@ function renderToday(){
   const cards=[
     {label:'NOW',big:t.label,title:t.title,sub:`${day.date} · ${day.dow}`,foot:day.sleep,route:''},
     {label:'NEXT',big:next[0],title:next[1],sub:next[2]||'',foot:nextFood?nextFood[1]:day.food,route:'plan'},
-    {label:'ROUTE',big:`DAY ${String(day.id).padStart(2,'0')}`,title:day.name,sub:day.events.slice(0,4).map(e=>`${e[0]} ${e[1]}`).join(' · '),foot:day.place,route:''},
-    {label:'CTRL',big:'MORE',title:'BOOK · MONEY · TALK',sub:'',foot:'CHECK · MAYBE · WEATHER',route:'more'}
+    {label:'ROUTE',big:`DAY ${String(day.id).padStart(2,'0')}`,title:day.name,sub:day.events.slice(0,5).map(e=>`${e[0]} ${e[1]}`).join(' · '),foot:day.place,route:''},
+    {label:'CTRL',big:'MORE',title:'BOOK · MONEY · TALK',sub:'CHECK · MAYBE · WEATHER',foot:'',route:'more'}
   ];
   document.getElementById('today').innerHTML=`
-    <div class="page-minimal-head clean-head today-head">
-      <h1 class="minimal-title">TODAY</h1>
-      <div class="head-rule"></div>
-    </div>
-    <div class="snap-shell clean-today" id="todayRail">
+    <div class="snap-shell clean-today today-full" id="todayRail">
       <div class="snap-rail">
         ${cards.map((c,i)=>c.route
           ? `<button class="snap-card clean-snap-card today-surface-link" onclick="go('${c.route}')" aria-label="${c.label} 열기">
@@ -2944,14 +3113,14 @@ function renderToday(){
               <div class="snap-big">${c.big}</div>
               <div class="snap-title">${c.title}</div>
               ${c.sub?`<div class="snap-sub">${c.sub}</div>`:''}
-              <div class="snap-foot"><span>${c.foot}</span></div>
+              ${c.foot?`<div class="snap-foot"><span>${c.foot}</span></div>`:''}
             </button>`
           : `<article class="snap-card clean-snap-card">
               <div class="snap-card-top"><span>${c.label}</span></div>
               <div class="snap-big">${c.big}</div>
               <div class="snap-title">${c.title}</div>
               ${c.sub?`<div class="snap-sub">${c.sub}</div>`:''}
-              <div class="snap-foot"><span>${c.foot}</span></div>
+              ${c.foot?`<div class="snap-foot"><span>${c.foot}</span></div>`:''}
             </article>`
         ).join('')}
       </div>
@@ -2964,11 +3133,7 @@ function renderToday(){
 
 function renderPlan(){
   document.getElementById('plan').innerHTML=`
-    <div class="page-minimal-head plan-head clean-head">
-      <h1 class="minimal-title">PLAN</h1>
-      <div class="head-rule"></div>
-    </div>
-    <div class="snap-shell plan-snap clean-plan" id="planRail">
+    <div class="snap-shell plan-snap clean-plan plan-full" id="planRail">
       <div class="plan-swipe-top clean-plan-counter">
         <span class="snap-count">01 / ${String(DAYS.length).padStart(2,'0')}</span>
       </div>
