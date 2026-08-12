@@ -1,14 +1,11 @@
-# Chongqing City v4
+# Chongqing City v6
 
-GitHub Pages 저장소 루트에 이 폴더 안의 파일을 모두 업로드하세요.
+이번 버전은 `index.html` 하나에 CSS, 일정 데이터, 기능 JavaScript가 모두 들어 있습니다.
 
-이번 버전은 실제 멀티페이지 구조입니다.
-- index.html — PLAN
-- spots.html — SPOTS
-- eat.html — EAT
-- money.html — MONEY
-- talk.html — TALK
-- check.html — CHECK
-- detail.html — 장소/음식 상세
+GitHub 저장소 루트에 아래 3개만 업로드/덮어쓰기하면 됩니다.
 
-기존 파일에 더해 styles.css, data.js, app.js 및 각 HTML 페이지도 모두 필요합니다.
+- index.html
+- manifest.json
+- sw.js
+
+기존 v5의 `spots.html`, `eat.html`, `styles.css`, `data.js` 같은 파일은 없어도 됩니다.
