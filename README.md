@@ -1,11 +1,10 @@
-# Chongqing City v6
+# Chongqing City v7
 
-이번 버전은 `index.html` 하나에 CSS, 일정 데이터, 기능 JavaScript가 모두 들어 있습니다.
+Single-file travel PWA with card-style detail pages, representative images, expanded travel Chinese, budget and checklist.
 
-GitHub 저장소 루트에 아래 3개만 업로드/덮어쓰기하면 됩니다.
-
+Upload these three files to the root of the GitHub Pages repository:
 - index.html
 - manifest.json
 - sw.js
 
-기존 v5의 `spots.html`, `eat.html`, `styles.css`, `data.js` 같은 파일은 없어도 됩니다.
+Representative images are loaded from external image URLs. If an image cannot load, the detail card shows a styled PHOTO fallback instead.
