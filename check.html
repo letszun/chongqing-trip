@@ -1,3 +1,12 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#c84236"><title>Chongqing City — Check</title><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css"></head><body><main class="shell"><header class="page-header"><div class="eyebrow">Before departure</div><h1 class="page-title">CHECK</h1></header><div id="checks"></div><div class="note"><label>Notes</label><textarea id="notes" placeholder="예약번호, 숙소 주소, 살 것"></textarea></div></main><div id="nav"></div><script src="data.js"></script><script src="app.js"></script><script>
-const root=document.getElementById('checks');root.innerHTML=CHECKS.map((x,i)=>`<label class="check-row ${state['check'+i]?'done':''}" id="row${i}"><input type="checkbox" ${state['check'+i]?'checked':''} data-i="${i}"><span>${x}</span></label>`).join('');root.querySelectorAll('input').forEach(x=>x.onchange=()=>{state['check'+x.dataset.i]=x.checked;save();document.getElementById('row'+x.dataset.i).classList.toggle('done',x.checked)});const n=document.getElementById('notes');n.value=state.freeNotes||'';n.oninput=()=>{state.freeNotes=n.value;save()};document.getElementById('nav').innerHTML=nav('check');
-</script></body></html>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111111"><title>Chongqing City — Check</title><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css"></head><body>
+<main class="shell">
+  <header class="page-header"><div class="page-label">Before departure</div><h1 class="page-title">CHECK</h1></header>
+  <section class="check-grid" id="checks"></section>
+  <div class="note-card"><label>Notes</label><textarea id="notes" placeholder="예약번호, 숙소 주소, 살 것"></textarea></div>
+</main>
+<div id="nav"></div>
+<script src="data.js"></script><script src="app.js"></script>
+<script>
+const root=document.getElementById('checks');root.innerHTML=CHECKS.map((x,i)=>`<label class="task-card ${colorClass(i,4)} ${state['check'+i]?'done':''}" id="row${i}"><input type="checkbox" ${state['check'+i]?'checked':''} data-i="${i}"><span class="task-text">${x}</span></label>`).join('');root.querySelectorAll('input').forEach(x=>x.onchange=()=>{state['check'+x.dataset.i]=x.checked;save();document.getElementById('row'+x.dataset.i).classList.toggle('done',x.checked)});const n=document.getElementById('notes');n.value=state.freeNotes||'';n.oninput=()=>{state.freeNotes=n.value;save()};document.getElementById('nav').innerHTML=nav('check');
+</script>
+</body></html>
