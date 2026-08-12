@@ -1,13 +1,10 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111111"><title>Chongqing City — Detail</title><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css"></head><body>
-<main class="shell" id="detail"></main>
-<script src="data.js"></script><script src="app.js"></script>
-<script>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#c84236"><title>Chongqing City — Detail</title><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css"></head><body><main class="shell" id="detail"></main><script src="data.js"></script><script src="app.js"></script><script>
 const q=new URLSearchParams(location.search),type=q.get('type'),id=q.get('id');const obj=type==='food'?FOODS[id]:SPOTS[id];const back=type==='food'?'eat.html':'spots.html';
-if(!obj){document.getElementById('detail').innerHTML='<div class="page-header"><h1 class="page-title">NOT FOUND</h1><a class="back-link" href="index.html">← PLAN</a></div>'}else{
- const isFood=type==='food'; const bullets=isFood?obj.order:obj.highlights; const idx=(Object.keys(isFood?FOODS:SPOTS).indexOf(id));
+if(!obj){document.getElementById('detail').innerHTML='<div class="page-header"><h1 class="page-title">NOT FOUND</h1><a class="back" href="index.html">← PLAN</a></div>'}else{
+ const isFood=type==='food';
+ const bullets=isFood?obj.order:obj.highlights;
  document.title=`${obj.name} — Chongqing City`;
- document.getElementById('detail').innerHTML=`<div class="page-header"><a class="back-link" href="${back}">← ${isFood?'EAT':'SPOTS'}</a><section class="detail-hero ${colorClass(idx,2)}"><div class="type">${obj.kind}</div><div class="name">${obj.name}</div><div class="cn">${obj.cn}</div><div class="detail-tags"><span>${obj.date}</span>${obj.area?`<span>${obj.area}</span>`:''}${obj.duration?`<span>${obj.duration}</span>`:''}</div></section><section class="section"><h2>About</h2><p>${obj.summary}</p></section><section class="section"><h2>${isFood?'Order':'Highlights'}</h2><ul>${(bullets||[]).map(x=>`<li>${x}</li>`).join('')}</ul></section><section class="section"><h2>Note</h2><ul>${(obj.tips||[]).map(x=>`<li>${x}</li>`).join('')}</ul></section><div class="action-row"><button class="action-btn" id="copySearch">검색어 복사</button><button class="action-btn" id="copyCN">중국어명 복사</button></div></div>`;
- document.getElementById('copySearch').onclick=()=>copyText(obj.search||obj.cn); document.getElementById('copyCN').onclick=()=>copyText(obj.cn);
+ document.getElementById('detail').innerHTML=`<div class="page-header"><a class="back" href="${back}">← ${isFood?'EAT':'SPOTS'}</a><section class="detail-hero"><div class="detail-type">${obj.kind}</div><h1 class="detail-name">${obj.name}</h1><div class="detail-cn">${obj.cn}</div><div class="detail-meta"><span class="tag">${obj.date}</span>${obj.area?`<span class="tag">${obj.area}</span>`:''}${obj.duration?`<span class="tag">${obj.duration}</span>`:''}</div></section><section class="detail-section"><h2>ABOUT</h2><p>${obj.summary}</p></section><section class="detail-section"><h2>${isFood?'ORDER':'HIGHLIGHTS'}</h2><ul>${(bullets||[]).map(x=>`<li>${x}</li>`).join('')}</ul></section><section class="detail-section"><h2>NOTE</h2><ul>${(obj.tips||[]).map(x=>`<li>${x}</li>`).join('')}</ul></section><div class="action-row"><button class="action red" id="copySearch">검색어 복사</button><button class="action" id="copyCN">중국어명 복사</button></div></div>`;
+ document.getElementById('copySearch').onclick=()=>copyText(obj.search||obj.cn);document.getElementById('copyCN').onclick=()=>copyText(obj.cn);
 }
-</script>
-</body></html>
+</script></body></html>

@@ -1,35 +1,6 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111111"><title>Chongqing City</title><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css"></head><body>
-<main class="shell">
-  <section class="page-top">
-    <div class="hero-kicker">CHONGQING · WULONG · AUG 25–29</div>
-    <h1 class="hero-title">CHONGQING<br>CITY</h1>
-    <div class="hero-meta">
-      <span class="pill">2 PEOPLE</span>
-      <span class="pill">4 NIGHTS · 5 DAYS</span>
-      <span class="pill">CITY + WULONG</span>
-    </div>
-    <div class="summary-card">
-      <div class="tiny">Main Route</div>
-      <h2>City → Wulong → City</h2>
-      <p>충칭 1박, 우롱 1박, 충칭 2박. 일정 카드에서 장소·음식을 누르면 상세 페이지로 이동합니다.</p>
-    </div>
-  </section>
-
-  <div class="quick-nav">
-    <a href="#day1" class="pill">DAY 01</a>
-    <a href="#day2" class="pill">DAY 02</a>
-    <a href="#day3" class="pill">DAY 03</a>
-    <a href="#day4" class="pill">DAY 04</a>
-    <a href="#day5" class="pill">DAY 05</a>
-  </div>
-
-  <section class="day-grid" id="days"></section>
-</main>
-<div id="nav"></div>
-<script src="data.js"></script><script src="app.js"></script>
-<script>
-const root=document.getElementById('days');
-root.innerHTML=DAYS.map((d,di)=>`<section class="card day-card ${colorClass(di)}" id="day${di+1}"><div class="top-row"><div><div class="day-no">DAY ${String(di+1).padStart(2,'0')}</div><div class="big">${d.name}</div><div class="sub">${d.place}</div></div><div><div class="date">${d.date}</div><div class="card-badge">${d.dow}</div></div></div><div class="event-list">${d.events.map(e=>`<div class="event-item ${e.type?'clickable':''}">${e.type?`<a href="${detailUrl(e.type,e.id)}" style="display:contents">`:''}<div class="event-time">${e.time}</div><div><div class="event-title">${e.title}</div><div class="event-sub">${e.sub||''}</div></div>${e.type?`</a>`:''}</div>`).join('')}</div></section>`).join('');
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#c84236"><title>Chongqing City — Plan</title><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="styles.css"></head><body>
+<main class="shell"><header class="app-header"><h1 class="app-title">CHONGQING<br><span>CITY</span></h1><div class="app-meta">AUG 25—29<br>CHONGQING · WULONG</div></header><div id="days"></div></main><div id="nav"></div><script src="data.js"></script><script src="app.js"></script><script>
+const wrap=document.getElementById('days');
+wrap.innerHTML=DAYS.map((d,di)=>`<section class="day"><div class="day-head"><div class="day-date">${d.date}<small>${d.dow} · DAY ${String(di+1).padStart(2,'0')}</small></div><div><div class="day-name">${d.name}</div><div class="day-place">${d.place}</div></div></div><div class="timeline">${d.events.map(e=>`<div class="event"><div class="event-time">${e.time}</div><div class="event-main">${e.type?`<a class="event-link" href="${detailUrl(e.type,e.id)}"><div class="event-title">${e.title}</div><div class="event-sub">${e.sub}</div></a>`:`<div class="event-title">${e.title}</div><div class="event-sub">${e.sub}</div>`}</div>${e.type?`<div class="event-type">${e.type}</div>`:''}</div>`).join('')}</div></section>`).join('');
 document.getElementById('nav').innerHTML=nav('plan');
-</script>
-</body></html>
+</script></body></html>
