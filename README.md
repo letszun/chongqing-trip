@@ -1,24 +1,14 @@
-# RED CITY — 충칭·우롱 4박5일 여행앱
+# Chongqing City v4
 
-충칭 레드 + 블랙/화이트 + 라이트 옐로우 + 라임을 사용한 모바일 우선 PWA입니다.
-큰 타이포그래피, 컬러 블록, 둥근 카드와 하단 네비게이션을 중심으로 리디자인했습니다.
+GitHub Pages 저장소 루트에 이 폴더 안의 파일을 모두 업로드하세요.
 
-## GitHub Pages 업데이트
-기존 `chongqing-trip` 저장소의 루트에 아래 3개 파일을 **덮어쓰기** 하세요.
-- `index.html`
-- `manifest.json`
-- `sw.js`
+이번 버전은 실제 멀티페이지 구조입니다.
+- index.html — PLAN
+- spots.html — SPOTS
+- eat.html — EAT
+- money.html — MONEY
+- talk.html — TALK
+- check.html — CHECK
+- detail.html — 장소/음식 상세
 
-업로드 후 GitHub Pages는 자동으로 다시 배포됩니다.
-기존 PWA를 홈 화면에 설치한 상태라면 앱을 완전히 닫았다가 다시 열거나, 브라우저에서 새로고침하세요.
-서비스워커 캐시도 새 버전으로 교체되도록 구성했습니다.
-
-## 기능
-- 8/25~8/29 일정 + 날짜 필터
-- 장소 중국어명 복사
-- 먹킷리스트 체크
-- 2인 예산 계산기
-- 현지 중국어 문장 복사
-- 출발 전 체크리스트
-- 메모 자동 저장
-- 오프라인 캐시
+기존 파일에 더해 styles.css, data.js, app.js 및 각 HTML 페이지도 모두 필요합니다.
