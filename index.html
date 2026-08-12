@@ -269,6 +269,47 @@ body{font-size:16px}
   color:var(--grey);
 }
 
+
+/* v20 — iOS Safari / standalone PWA text color hardening for TODAY + PLAN.
+   WebKit can apply its control text fill color inside clickable buttons even when
+   the parent button inherits the intended CSS color. Force text-fill to follow
+   each element's resolved currentColor without changing the visual hierarchy. */
+#today button,
+#today button *,
+#plan button,
+#plan button *{
+  -webkit-text-fill-color:currentColor !important;
+}
+
+/* Explicit base colors for the clickable components used on these two screens. */
+#today .quick-btn{
+  color:var(--charcoal) !important;
+}
+#today .quick-btn .mini-title,
+#today .quick-btn p{
+  color:var(--muted) !important;
+}
+#today .action-btn.light{
+  color:var(--charcoal) !important;
+}
+#today .action-btn{
+  -webkit-text-fill-color:currentColor !important;
+}
+
+#plan .day-card:not(.color-red):not(.color-black) .event.clickable{
+  color:var(--charcoal) !important;
+}
+#plan .day-card.color-red .event.clickable,
+#plan .day-card.color-black .event.clickable{
+  color:var(--grey) !important;
+}
+#plan .event.clickable .time,
+#plan .event.clickable .title,
+#plan .event.clickable .sub{
+  color:inherit !important;
+  -webkit-text-fill-color:currentColor !important;
+}
+
 </style>
 </head>
 <body>
