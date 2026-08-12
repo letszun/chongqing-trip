@@ -1,10 +1,10 @@
 {
-  "name":"충칭·우롱 4박5일 여행앱",
-  "short_name":"충칭여행",
+  "name":"RED CITY — 충칭·우롱 여행",
+  "short_name":"RED CITY",
   "start_url":"./index.html",
   "display":"standalone",
-  "background_color":"#f6f7fb",
-  "theme_color":"#111827",
+  "background_color":"#f4f2e8",
+  "theme_color":"#0b0d0f",
   "lang":"ko-KR",
-  "description":"충칭·우롱 4박5일 일정, 먹거리, 예산, 중국어, 체크리스트를 담은 오프라인 여행앱"
+  "description":"충칭·우롱 4박5일 일정, 장소, 먹거리, 예산, 중국어, 체크리스트를 담은 오프라인 여행앱"
 }

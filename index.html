@@ -3,191 +3,274 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#111827" />
+  <meta name="theme-color" content="#0b0d0f" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>충칭·우롱 4박5일</title>
+  <title>RED CITY — Chongqing Trip</title>
   <link rel="manifest" href="manifest.json" />
   <style>
     :root{
-      --bg:#f6f7fb; --card:#fff; --text:#172033; --muted:#6b7280; --line:#e5e7eb;
-      --accent:#111827; --soft:#eef2ff; --ok:#ecfdf5; --warn:#fff7ed; --shadow:0 8px 28px rgba(15,23,42,.08);
-      --radius:20px;
+      --ink:#0b0d0f;
+      --paper:#f4f2e8;
+      --white:#fffef8;
+      --red:#f13223;
+      --red-deep:#d9271c;
+      --lime:#c8ff2d;
+      --yellow:#f3e978;
+      --line:#17191b;
+      --soft:#e7e5db;
+      --muted:#66685f;
+      --radius:28px;
+      --radius-sm:20px;
+      --shadow:0 10px 0 rgba(11,13,15,.12);
     }
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",Roboto,Arial,sans-serif;line-height:1.5}
-    button,input,textarea{font:inherit}
+    html{scroll-behavior:smooth;background:var(--paper)}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",Arial,sans-serif;line-height:1.35;letter-spacing:-.02em}
+    button,input,textarea{font:inherit;color:inherit}
     button{cursor:pointer}
-    .app{max-width:820px;margin:0 auto;padding:0 16px 92px}
-    .hero{margin:0 -16px 18px;padding:calc(28px + env(safe-area-inset-top)) 20px 26px;background:linear-gradient(135deg,#111827,#374151);color:#fff;border-radius:0 0 28px 28px}
-    .eyebrow{font-size:13px;opacity:.72;margin-bottom:8px}.hero h1{font-size:29px;line-height:1.1;margin:0 0 8px}.hero p{margin:0;color:#d1d5db}
-    .hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}.stat{background:rgba(255,255,255,.1);padding:11px;border-radius:14px}.stat b{display:block;font-size:17px}.stat span{font-size:12px;color:#d1d5db}
-    .section{display:none}.section.active{display:block}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:12px 0;box-shadow:var(--shadow)}
-    .card h2,.card h3{margin:0 0 10px}.card h2{font-size:20px}.card h3{font-size:16px}.muted{color:var(--muted);font-size:13px}
-    .day{border-left:4px solid var(--accent)}
-    .day-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.day-title{font-weight:800;font-size:18px}.pill{white-space:nowrap;font-size:12px;padding:5px 9px;border-radius:999px;background:var(--soft)}
-    .timeline{margin-top:10px}.row{display:grid;grid-template-columns:72px 1fr;gap:10px;padding:10px 0;border-top:1px dashed var(--line)}.row:first-child{border-top:none}.time{font-weight:700;font-size:13px}.desc b{display:block}.desc small{color:var(--muted)}
-    .place-grid,.food-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.mini{border:1px solid var(--line);border-radius:16px;padding:13px;background:#fff}.mini b{display:block}.cn{font-size:12px;color:var(--muted);margin-top:2px}
-    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.btn{border:none;border-radius:12px;padding:9px 11px;background:var(--accent);color:#fff;font-size:13px}.btn.secondary{background:#f3f4f6;color:#111827;border:1px solid var(--line)}
-    .check{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}.check:first-of-type{border-top:0}.check input{width:20px;height:20px;margin-top:2px;accent-color:#111827}.done{text-decoration:line-through;opacity:.55}
-    .budget-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{background:#f9fafb;border:1px solid var(--line);border-radius:14px;padding:12px}.field label{font-size:12px;color:var(--muted);display:block}.field input{width:100%;border:0;background:transparent;font-size:22px;font-weight:800;outline:0;margin-top:3px}.sum{font-size:30px;font-weight:900;margin-top:4px}.split{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--line)}
-    .phrase{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}.phrase:first-of-type{border-top:0}.phrase .ko{font-size:13px;color:var(--muted)}.phrase .zh{font-weight:700}
-    textarea{width:100%;min-height:120px;border:1px solid var(--line);border-radius:14px;padding:12px;resize:vertical;background:#fff;color:var(--text)}
-    .notice{background:var(--warn);border:1px solid #fed7aa;border-radius:16px;padding:13px;margin:12px 0}.ok{background:var(--ok);border:1px solid #a7f3d0}
-    .bottom{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(820px,100%);display:grid;grid-template-columns:repeat(6,1fr);gap:4px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:7px 8px calc(7px + env(safe-area-inset-bottom));z-index:20}.nav{border:0;background:transparent;border-radius:12px;padding:7px 2px;color:#6b7280;font-size:10px}.nav span{display:block;font-size:19px;line-height:1.2}.nav.active{background:#111827;color:#fff}
-    .top-actions{display:flex;gap:8px;margin-top:14px}.install{background:#fff;color:#111827;border:0;padding:9px 12px;border-radius:12px;font-weight:700}.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3);padding:9px 12px;border-radius:12px}
-    @media(max-width:540px){.place-grid,.food-grid,.budget-grid{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr 1fr 1fr}.row{grid-template-columns:62px 1fr}.bottom{grid-template-columns:repeat(6,1fr)}}
+    ::selection{background:var(--lime);color:var(--ink)}
+
+    .shell{max-width:860px;margin:0 auto;padding:0 14px 118px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:calc(16px + env(safe-area-inset-top)) 2px 12px}
+    .brand{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+    .brand-dot{width:13px;height:13px;border-radius:50%;background:var(--red);border:2px solid var(--ink)}
+    .mini-date{font-size:11px;font-weight:800;border:1.5px solid var(--ink);border-radius:999px;padding:6px 10px;background:var(--white)}
+
+    .hero{position:relative;overflow:hidden;border:2px solid var(--ink);border-radius:34px;background:var(--red);min-height:370px;padding:24px 22px 20px;box-shadow:var(--shadow)}
+    .hero:after{content:"";position:absolute;width:210px;height:210px;border-radius:50%;background:var(--yellow);right:-70px;top:-65px;border:2px solid var(--ink)}
+    .hero-kicker{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
+    .hero-kicker span:last-child{background:var(--ink);color:white;border-radius:999px;padding:7px 10px;letter-spacing:.06em}
+    .display{position:relative;z-index:1;margin:56px 0 10px;font-size:clamp(62px,16vw,120px);line-height:.78;letter-spacing:-.08em;font-weight:950;text-transform:uppercase;max-width:740px}
+    .display .outline{-webkit-text-stroke:2px var(--ink);color:transparent}
+    .hero-sub{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-top:24px}
+    .hero-sub p{margin:0;max-width:430px;font-weight:700;font-size:14px}
+    .hero-number{font-size:48px;line-height:.9;font-weight:950;letter-spacing:-.07em}
+    .hero-number small{display:block;font-size:10px;letter-spacing:.12em;margin-top:7px;text-align:right;text-transform:uppercase}
+
+    .quick-grid{display:grid;grid-template-columns:1.25fr .9fr .9fr;gap:10px;margin-top:14px}
+    .quick{border:2px solid var(--ink);border-radius:24px;padding:15px;background:var(--white);min-height:104px;display:flex;flex-direction:column;justify-content:space-between}
+    .quick.lime{background:var(--lime)} .quick.yellow{background:var(--yellow)}
+    .quick-label{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+    .quick strong{font-size:24px;line-height:1;font-weight:950;letter-spacing:-.06em}
+    .quick span{font-size:11px;font-weight:700;color:#333}
+
+    .section{display:none;padding-top:18px}.section.active{display:block}
+    .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin:7px 3px 16px}
+    .section-title{margin:0;font-size:clamp(38px,9vw,68px);line-height:.88;font-weight:950;letter-spacing:-.07em;text-transform:uppercase}
+    .section-note{font-size:11px;font-weight:800;max-width:200px;text-align:right;color:var(--muted)}
+
+    .day-tabs{display:flex;gap:7px;overflow:auto;padding:1px 1px 10px;scrollbar-width:none}.day-tabs::-webkit-scrollbar{display:none}
+    .day-chip{flex:0 0 auto;border:1.7px solid var(--ink);background:var(--white);border-radius:999px;padding:8px 11px;font-size:11px;font-weight:900;text-transform:uppercase}
+    .day-chip.active{background:var(--ink);color:white}
+
+    .day-card{border:2px solid var(--ink);border-radius:30px;overflow:hidden;margin:0 0 14px;background:var(--white);box-shadow:0 7px 0 rgba(11,13,15,.09)}
+    .day-card[data-tone="red"] .day-cover{background:var(--red)}
+    .day-card[data-tone="lime"] .day-cover{background:var(--lime)}
+    .day-card[data-tone="yellow"] .day-cover{background:var(--yellow)}
+    .day-card[data-tone="black"] .day-cover{background:var(--ink);color:white}
+    .day-cover{padding:18px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end;border-bottom:2px solid var(--ink)}
+    .day-index{font-size:10px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;margin-bottom:20px}
+    .day-name{font-size:35px;line-height:.9;font-weight:950;letter-spacing:-.06em}
+    .day-place{font-size:12px;font-weight:800;margin-top:9px}
+    .day-num{font-size:64px;line-height:.75;font-weight:950;letter-spacing:-.08em;align-self:center}
+    .events{padding:4px 16px 9px;background:var(--white)}
+    .event{display:grid;grid-template-columns:72px 1fr 26px;gap:9px;align-items:start;padding:15px 0;border-top:1.5px solid var(--ink)}
+    .event:first-child{border-top:0}
+    .event-time{font-size:12px;font-weight:950}
+    .event-title{font-size:15px;font-weight:900}.event-sub{font-size:11px;color:var(--muted);margin-top:3px;font-weight:650}
+    .event-dot{width:12px;height:12px;border:2px solid var(--ink);border-radius:50%;margin-top:3px;justify-self:end}.event:nth-child(2n) .event-dot{background:var(--lime)}
+
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .tile{border:2px solid var(--ink);border-radius:26px;padding:16px;min-height:168px;display:flex;flex-direction:column;justify-content:space-between;background:var(--white);position:relative;overflow:hidden}
+    .tile:nth-child(4n+1){background:var(--lime)}.tile:nth-child(4n+2){background:var(--white)}.tile:nth-child(4n+3){background:var(--yellow)}.tile:nth-child(4n){background:var(--red)}
+    .tile .date{font-size:10px;font-weight:950;letter-spacing:.12em;text-transform:uppercase}
+    .tile b{font-size:22px;line-height:.95;font-weight:950;letter-spacing:-.05em;max-width:92%}.tile .cn{font-size:12px;font-weight:750;margin-top:5px}
+    .tile-actions{display:flex;justify-content:flex-end;margin-top:18px}
+    .round-btn{width:36px;height:36px;border:1.7px solid var(--ink);border-radius:50%;background:var(--white);display:grid;place-items:center;font-weight:950;font-size:15px}
+
+    .food-card{border:2px solid var(--ink);border-radius:26px;padding:16px;min-height:150px;background:var(--white);position:relative;overflow:hidden;display:block}
+    .food-card:nth-child(3n+1){background:var(--yellow)}.food-card:nth-child(3n+2){background:var(--red)}.food-card:nth-child(3n){background:var(--lime)}
+    .food-card input{position:absolute;opacity:0;pointer-events:none}
+    .food-top{display:flex;justify-content:space-between;align-items:start;gap:8px}.food-check{width:30px;height:30px;border:2px solid var(--ink);border-radius:50%;background:var(--white);display:grid;place-items:center;font-weight:950}
+    .food-card.done{filter:saturate(.28);opacity:.58}.food-card.done .food-check:after{content:"✓"}.food-card.done .food-name{text-decoration:line-through}
+    .food-name{font-size:24px;line-height:.95;font-weight:950;letter-spacing:-.05em;margin-top:22px}.food-cn{font-size:12px;font-weight:750;margin-top:5px}.food-when{font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-top:12px}
+
+    .budget-hero{border:2px solid var(--ink);border-radius:30px;background:var(--lime);padding:18px;position:relative;overflow:hidden}
+    .budget-label{font-size:10px;font-weight:950;letter-spacing:.14em;text-transform:uppercase}
+    .sum{font-size:clamp(55px,14vw,96px);line-height:.86;font-weight:950;letter-spacing:-.08em;margin:28px 0 4px;white-space:nowrap}
+    .sum small{font-size:16px;letter-spacing:0;margin-left:4px}
+    .budget-sub{font-size:12px;font-weight:800}
+    .fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+    .field{border:2px solid var(--ink);border-radius:23px;padding:14px;background:var(--white)}
+    .field:nth-child(2){background:var(--yellow)}
+    .field label{display:block;font-size:10px;font-weight:950;letter-spacing:.09em;text-transform:uppercase}
+    .field input{width:100%;border:0;background:transparent;outline:none;font-size:34px;line-height:1;font-weight:950;letter-spacing:-.06em;margin-top:13px}
+    .costs{border:2px solid var(--ink);border-radius:26px;background:var(--white);margin-top:10px;overflow:hidden}
+    .cost{display:flex;justify-content:space-between;gap:15px;padding:13px 15px;border-top:1.5px solid var(--ink);font-size:12px;font-weight:800}.cost:first-child{border-top:0}.cost b{font-weight:950;text-align:right}
+
+    .phrase-card{border:2px solid var(--ink);border-radius:24px;background:var(--white);padding:15px;margin-bottom:9px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+    .phrase-card:nth-child(4n+1){background:var(--yellow)}.phrase-card:nth-child(4n+3){background:var(--lime)}
+    .ko{font-size:11px;font-weight:750;color:#444}.zh{font-size:18px;font-weight:950;line-height:1.1;margin-top:5px}
+    .copy{border:1.7px solid var(--ink);border-radius:999px;background:var(--white);padding:8px 11px;font-size:10px;font-weight:950;text-transform:uppercase}
+
+    .check-card{border:2px solid var(--ink);border-radius:26px;background:var(--white);padding:8px 15px;margin-bottom:10px}
+    .check-row{display:grid;grid-template-columns:34px 1fr;gap:9px;align-items:center;padding:13px 0;border-top:1.5px solid var(--ink);font-size:13px;font-weight:850}.check-row:first-child{border-top:0}
+    .check-row input{appearance:none;width:26px;height:26px;border:2px solid var(--ink);border-radius:8px;background:var(--white);display:grid;place-items:center;margin:0}.check-row input:checked{background:var(--lime)}.check-row input:checked:after{content:"✓";font-weight:950}.check-row.done span{text-decoration:line-through;opacity:.5}
+
+    .memo{border:2px solid var(--ink);border-radius:26px;padding:15px;background:var(--yellow);margin-top:10px}.memo h3{font-size:22px;line-height:1;margin:0 0 10px;font-weight:950;letter-spacing:-.04em}.memo textarea{width:100%;min-height:120px;border:0;border-top:1.5px solid var(--ink);background:transparent;padding:12px 0 0;resize:vertical;outline:0;font-size:13px;font-weight:650}
+    .status-card{border:2px solid var(--ink);border-radius:26px;padding:15px;background:var(--lime);font-size:12px;font-weight:800;margin-top:10px}
+
+    .utility-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 2px 0}.utility-btn{border:1.7px solid var(--ink);border-radius:999px;padding:9px 12px;background:var(--white);font-size:10px;font-weight:950;text-transform:uppercase}.utility-btn.dark{background:var(--ink);color:white}
+
+    .bottom{position:fixed;left:50%;transform:translateX(-50%);bottom:10px;width:min(832px,calc(100% - 18px));z-index:30;background:rgba(11,13,15,.96);border:2px solid var(--ink);border-radius:25px;padding:7px 8px calc(7px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(6,1fr);gap:4px;box-shadow:0 10px 30px rgba(0,0,0,.25);backdrop-filter:blur(18px)}
+    .nav{border:0;background:transparent;color:#aaa;border-radius:18px;padding:8px 1px 7px;font-size:9px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;min-width:0}.nav-icon{display:block;font-size:15px;line-height:1;margin-bottom:5px}.nav.active{background:var(--lime);color:var(--ink)}
+
+    .toast{position:fixed;left:50%;bottom:104px;transform:translate(-50%,16px);background:var(--ink);color:white;border-radius:999px;padding:9px 14px;font-size:11px;font-weight:900;opacity:0;pointer-events:none;transition:.2s;z-index:60}.toast.show{opacity:1;transform:translate(-50%,0)}
+
+    @media(max-width:580px){
+      .shell{padding-left:10px;padding-right:10px}.hero{min-height:348px;padding:20px 17px}.display{margin-top:64px}.quick-grid{grid-template-columns:1.3fr 1fr}.quick:first-child{grid-column:1/-1;min-height:90px}.grid{grid-template-columns:1fr 1fr}.tile{min-height:154px}.fields{grid-template-columns:1fr}.event{grid-template-columns:58px 1fr 20px}.day-num{font-size:55px}.section-note{display:none}
+    }
+    @media(max-width:380px){.grid{grid-template-columns:1fr}.bottom{grid-template-columns:repeat(6,1fr)}.nav{font-size:8px}.nav-icon{font-size:14px}}
   </style>
 </head>
 <body>
-<div class="app">
+<div class="shell">
+  <div class="topbar">
+    <div class="brand"><span class="brand-dot"></span> LETSZUN / TRIP LAB</div>
+    <div class="mini-date">25—29 AUG 2026</div>
+  </div>
+
   <header class="hero">
-    <div class="eyebrow">2026.08.25 — 08.29 · 2인 여행</div>
-    <h1>충칭·우롱<br>4박 5일</h1>
-    <p>낮엔 관광, 오후엔 에어컨, 밤엔 2차전. 꽤 합리적인 작전입니다.</p>
-    <div class="hero-grid">
-      <div class="stat"><b>4박 5일</b><span>충칭 + 우롱</span></div>
-      <div class="stat"><b>1박</b><span>우롱</span></div>
-      <div class="stat"><b>2명</b><span>커플 여행</span></div>
+    <div class="hero-kicker"><span>CHONGQING × WULONG</span><span>LIVE PLAN</span></div>
+    <h1 class="display">RED<br><span class="outline">CITY.</span></h1>
+    <div class="hero-sub">
+      <p>충칭 3박 + 우롱 1박. 낮엔 도시와 협곡, 밤엔 야시장. 계획은 단단하게, 현장에서는 느슨하게.</p>
+      <div class="hero-number">05<small>days / 02 people</small></div>
     </div>
-    <div class="top-actions"><button class="install" id="installBtn" hidden>홈 화면에 설치</button><button class="ghost" id="resetBtn">체크 초기화</button></div>
   </header>
+
+  <div class="quick-grid">
+    <div class="quick lime"><div class="quick-label">Trip mode</div><strong>CITY<br>AFTER DARK</strong><span>야경 · 야시장 · 늦은 저녁</span></div>
+    <div class="quick yellow"><div class="quick-label">Wulong</div><strong>01 NIGHT</strong><span>8/26 → 8/27</span></div>
+    <div class="quick"><div class="quick-label">Route</div><strong>CKG ↔ WLG</strong><span>重庆东 ↔ 武隆南</span></div>
+  </div>
+
+  <div class="utility-row">
+    <button class="utility-btn dark" id="installBtn" hidden>Install app</button>
+    <button class="utility-btn" id="resetBtn">Reset checks</button>
+  </div>
 
   <main>
     <section id="schedule" class="section active">
-      <div class="card day"><div class="day-head"><div><div class="day-title">8/25 화 · 충칭 첫날</div><div class="muted">Fandiao Meiju 1박</div></div><span class="pill">야경 & 야시장</span></div>
-        <div class="timeline">
-          <div class="row"><div class="time">12:15</div><div class="desc"><b>인천 → 칭다오</b><small>TAO에서 중국 입국 및 환승</small></div></div>
-          <div class="row"><div class="time">15:10</div><div class="desc"><b>칭다오 → 충칭</b><small>18:05 CKG 도착</small></div></div>
-          <div class="row"><div class="time">19:30~</div><div class="desc"><b>Fandiao Meiju 체크인</b><small>도착 지연을 감안해 여유 있게</small></div></div>
-          <div class="row"><div class="time">20:00~</div><div class="desc"><b>해방비 → 八一好吃街</b><small>야시장 간식 + 밀크티</small></div></div>
-          <div class="row"><div class="time">21:30~</div><div class="desc"><b>魁星楼 / 戴家巷 → 홍야동</b><small>야경 산책, 늦으면 较场口夜市 추가</small></div></div>
-        </div>
-      </div>
-
-      <div class="card day"><div class="day-head"><div><div class="day-title">8/26 수 · 충칭 → 우롱</div><div class="muted">우롱 1박</div></div><span class="pill">천생삼교</span></div>
-        <div class="timeline">
-          <div class="row"><div class="time">08:30</div><div class="desc"><b>간단 조식</b><small>무리하면 안 되는 날</small></div></div>
-          <div class="row"><div class="time">09:00</div><div class="desc"><b>대한민국 임시정부 청사</b><small>약 1시간</small></div></div>
-          <div class="row"><div class="time">10:00~</div><div class="desc"><b>짐 회수 → 충칭동역</b><small>重庆东 → 武隆南</small></div></div>
-          <div class="row"><div class="time">14:00~</div><div class="desc"><b>천생삼교 天生三桥</b><small>우롱 핵심, 2~3시간</small></div></div>
-          <div class="row"><div class="time">18:00~</div><div class="desc"><b>우롱 양고기 저녁</b><small>碗碗羊肉 / 羊肉汤锅 · 공연은 안 봄</small></div></div>
-        </div>
-      </div>
-
-      <div class="card day"><div class="day-head"><div><div class="day-title">8/27 목 · 우롱 → 충칭</div><div class="muted">Fandiao Apartment 1/2</div></div><span class="pill">선녀산 + 관음교</span></div>
-        <div class="timeline">
-          <div class="row"><div class="time">07:30</div><div class="desc"><b>선녀산 仙女山</b><small>초원·삼림, 오전 추천</small></div></div>
-          <div class="row"><div class="time">10:30~</div><div class="desc"><b>용수협지봉 龙水峡地缝</b><small>협곡 트레킹</small></div></div>
-          <div class="row"><div class="time">오후</div><div class="desc"><b>우롱남 → 충칭동</b><small>고속철 복귀 후 체크인</small></div></div>
-          <div class="row"><div class="time">19:00~</div><div class="desc"><b>관음교 → 北仓</b><small>쇼핑·산책</small></div></div>
-          <div class="row"><div class="time">20:00~</div><div class="desc"><b>카오위 + 밀크티 → 九街</b><small>저녁이 길면 심야 상권까지</small></div></div>
-        </div>
-      </div>
-
-      <div class="card day"><div class="day-head"><div><div class="day-title">8/28 금 · 충칭 시내 풀데이</div><div class="muted">Fandiao Apartment 2/2</div></div><span class="pill">시티워크</span></div>
-        <div class="timeline">
-          <div class="row"><div class="time">08:00</div><div class="desc"><b>나한사 罗汉寺</b><small>아침에 빠르게</small></div></div>
-          <div class="row"><div class="time">10:00</div><div class="desc"><b>자기구고진 磁器口</b><small>기념품 + 陈麻花</small></div></div>
-          <div class="row"><div class="time">12:00</div><div class="desc"><b>리즈바역 李子坝</b><small>전망대에서 사진</small></div></div>
-          <div class="row"><div class="time">13:00</div><div class="desc"><b>어링공원(선택) → 어링얼창</b><small>COFFEE HOLIC 휴식 가능</small></div></div>
-          <div class="row"><div class="time">15:00</div><div class="desc"><b>호텔 휴식</b><small>8월 충칭에선 공식 일정 취급</small></div></div>
-          <div class="row"><div class="time">17:00</div><div class="desc"><b>십팔제</b><small>체력 부족하면 山城巷과 택1</small></div></div>
-          <div class="row"><div class="time">18:30~</div><div class="desc"><b>샤하오리 → 룽먼하오</b><small>해질 무렵 추천, 悟饮门 카페 가능</small></div></div>
-          <div class="row"><div class="time">21:00~</div><div class="desc"><b>마라롱샤 / 남빈루 야시장</b><small>저녁 2차전</small></div></div>
-        </div>
-      </div>
-
-      <div class="card day"><div class="day-head"><div><div class="day-title">8/29 토 · 귀국</div><div class="muted">지난 환승 포함</div></div><span class="pill">TNA 4h25m</span></div>
-        <div class="timeline">
-          <div class="row"><div class="time">08:30</div><div class="desc"><b>샤오몐 아침</b><small>重庆小面</small></div></div>
-          <div class="row"><div class="time">10:00</div><div class="desc"><b>공항 이동</b><small>13:30 CKG 출발</small></div></div>
-          <div class="row"><div class="time">15:45</div><div class="desc"><b>지난 도착</b><small>시내는 가지 않고 공항에서 환승</small></div></div>
-          <div class="row"><div class="time">16:20~</div><div class="desc"><b>산둥 음식 + 카페</b><small>把子肉 있으면 도전 → 국제선 출국절차</small></div></div>
-          <div class="row"><div class="time">20:10</div><div class="desc"><b>지난 → 인천</b><small>22:40 도착</small></div></div>
-        </div>
-      </div>
+      <div class="section-head"><h2 class="section-title">THE<br>PLAN</h2><div class="section-note">DAY 01—05<br>tap a day to focus</div></div>
+      <div class="day-tabs" id="dayTabs"></div>
+      <div id="scheduleList"></div>
     </section>
 
     <section id="places" class="section">
-      <div class="card"><h2>가고 싶은 곳</h2><p class="muted">중국어명을 누르면 고덕지도에 붙여넣기 좋게 복사됩니다.</p><div class="place-grid" id="placeGrid"></div></div>
+      <div class="section-head"><h2 class="section-title">SAVE<br>SPOTS</h2><div class="section-note">중국어명을 복사해서<br>高德地图에 붙여넣기</div></div>
+      <div class="grid" id="placeGrid"></div>
     </section>
 
     <section id="food" class="section">
-      <div class="card"><h2>먹킷리스트</h2><p class="muted">두 분이 나눠 먹는 기준. 체크는 자동 저장됩니다.</p><div class="food-grid" id="foodGrid"></div></div>
+      <div class="section-head"><h2 class="section-title">EAT<br>LIST</h2><div class="section-note">먹었으면 체크.<br>위장은 체크하지 마세요.</div></div>
+      <div class="grid" id="foodGrid"></div>
     </section>
 
     <section id="budget" class="section">
-      <div class="card"><h2>현지 예산 계산기</h2><div class="budget-grid">
-        <div class="field"><label>1인 목표 예산 (CNY)</label><input id="ppBudget" inputmode="numeric" value="1800"></div>
-        <div class="field"><label>쇼핑 추가 예산 / 1인 (CNY)</label><input id="shopBudget" inputmode="numeric" value="250"></div>
-      </div><div style="margin-top:14px"><div class="muted">두 명 총 예산</div><div class="sum" id="totalBudget">4,100 CNY</div></div>
-        <div class="split"><span>우롱 관광지(공연 제외)</span><b>약 310 /인</b></div>
-        <div class="split"><span>충칭↔우롱 고속철</span><b>약 150 /인</b></div>
-        <div class="split"><span>식비·간식</span><b>약 600~800 /인</b></div>
-        <div class="split"><span>교통·디디</span><b>약 180~300 /인</b></div>
-        <div class="split"><span>쇼핑</span><b>입력값 기준</b></div>
-      </div>
-      <div class="card"><h3>공동 지출 메모</h3><textarea id="expenseNotes" placeholder="예: 8/27 카오위 186위안 / 둘이 반반"></textarea></div>
+      <div class="section-head"><h2 class="section-title">MONEY<br>MODE</h2><div class="section-note">2인 공동여행 기준<br>공연 제외</div></div>
+      <div class="budget-hero"><div class="budget-label">Total field budget / 2 people</div><div class="sum" id="totalBudget">4,100 <small>CNY</small></div><div class="budget-sub">숙소·항공 제외 · 쇼핑 예산 포함</div></div>
+      <div class="fields"><div class="field"><label>Base / 1 person</label><input id="ppBudget" inputmode="numeric" value="1800"></div><div class="field"><label>Shopping / 1 person</label><input id="shopBudget" inputmode="numeric" value="250"></div></div>
+      <div class="costs"><div class="cost"><span>우롱 관광지 · 공연 제외</span><b>≈ 310 / person</b></div><div class="cost"><span>충칭↔우롱 고속철</span><b>≈ 150 / person</b></div><div class="cost"><span>식비·간식</span><b>≈ 600—800 / person</b></div><div class="cost"><span>교통·디디</span><b>≈ 180—300 / person</b></div></div>
+      <div class="memo"><h3>EXPENSE NOTES</h3><textarea id="expenseNotes" placeholder="8/27 카오위 186위안 / 둘이 반반"></textarea></div>
     </section>
 
     <section id="phrases" class="section">
-      <div class="card"><h2>현지에서 바로 보여줄 중국어</h2><div id="phraseList"></div></div>
+      <div class="section-head"><h2 class="section-title">SAY<br>THIS</h2><div class="section-note">직원에게 화면을 보여주거나<br>중국어를 복사하세요.</div></div>
+      <div id="phraseList"></div>
     </section>
 
     <section id="checklist" class="section">
-      <div class="card"><h2>출발 전 체크</h2><div id="checkList"></div></div>
-      <div class="notice ok"><b>8/25 저녁</b><br><span class="muted">우롱 날씨·천생삼교·용수협지봉·선녀산 휴장 여부 확인 예약됨.</span></div>
-      <div class="card"><h3>자유 메모</h3><textarea id="freeNotes" placeholder="숙소 중국어 주소, 예약번호, 꼭 살 것 등"></textarea></div>
+      <div class="section-head"><h2 class="section-title">BEFORE<br>GO</h2><div class="section-note">출발 전에 끝내면<br>현지에서 덜 귀찮음</div></div>
+      <div class="check-card" id="checkList"></div>
+      <div class="status-card"><b>8/25 NIGHT CHECK</b><br>우롱 날씨 · 천생삼교 · 용수협지봉 · 선녀산 휴장 여부 확인 예약됨.</div>
+      <div class="memo"><h3>FREE NOTES</h3><textarea id="freeNotes" placeholder="숙소 중국어 주소, 예약번호, 꼭 살 것 등"></textarea></div>
     </section>
   </main>
 </div>
 
 <nav class="bottom">
-  <button class="nav active" data-target="schedule"><span>🗓️</span>일정</button>
-  <button class="nav" data-target="places"><span>📍</span>장소</button>
-  <button class="nav" data-target="food"><span>🍜</span>먹기</button>
-  <button class="nav" data-target="budget"><span>💰</span>예산</button>
-  <button class="nav" data-target="phrases"><span>🀄</span>중국어</button>
-  <button class="nav" data-target="checklist"><span>✅</span>체크</button>
+  <button class="nav active" data-target="schedule"><span class="nav-icon">01</span>Plan</button>
+  <button class="nav" data-target="places"><span class="nav-icon">⌖</span>Spots</button>
+  <button class="nav" data-target="food"><span class="nav-icon">●</span>Eat</button>
+  <button class="nav" data-target="budget"><span class="nav-icon">¥</span>Money</button>
+  <button class="nav" data-target="phrases"><span class="nav-icon">中</span>Talk</button>
+  <button class="nav" data-target="checklist"><span class="nav-icon">✓</span>Check</button>
 </nav>
+<div class="toast" id="toast">COPIED ✓</div>
 
 <script>
+const days=[
+{date:'08.25',dow:'TUE',title:'FIRST NIGHT',place:'CHONGQING · Fandiao Meiju',tone:'red',events:[
+['12:15','인천 → 칭다오','TAO에서 중국 입국 및 환승'],['15:10','칭다오 → 충칭','18:05 CKG 도착'],['19:30~','Fandiao Meiju 체크인','도착 지연 감안해 여유 있게'],['20:00~','해방비 → 八一好吃街','야시장 간식 + 밀크티'],['21:30~','魁星楼 / 戴家巷 → 홍야동','늦으면 较场口夜市 추가']]},
+{date:'08.26',dow:'WED',title:'INTO WULONG',place:'CHONGQING → WULONG · 1 NIGHT',tone:'yellow',events:[
+['08:30','간단 조식','무리하면 안 되는 날'],['09:00','대한민국 임시정부 청사','약 1시간'],['10:00~','짐 회수 → 충칭동역','重庆东 → 武隆南'],['14:00~','천생삼교 天生三桥','우롱 핵심 · 2~3시간'],['18:00~','우롱 양고기 저녁','碗碗羊肉 / 羊肉汤锅 · 공연 없음']]},
+{date:'08.27',dow:'THU',title:'BACK TO CITY',place:'WULONG → CHONGQING · Fandiao Apartment',tone:'lime',events:[
+['07:30','선녀산 仙女山','초원·삼림 · 오전 추천'],['10:30~','용수협지봉 龙水峡地缝','협곡 트레킹'],['PM','우롱남 → 충칭동','고속철 복귀 후 체크인'],['19:00~','관음교 → 北仓','쇼핑·산책'],['20:00~','카오위 + 밀크티 → 九街','저녁이 길면 심야 상권까지']]},
+{date:'08.28',dow:'FRI',title:'CITY WALK',place:'CHONGQING · FULL DAY',tone:'black',events:[
+['08:00','나한사 罗汉寺','아침에 빠르게'],['10:00','자기구고진 磁器口','기념품 + 陈麻花'],['12:00','리즈바역 李子坝','전망대에서 사진'],['13:00','어링공원(선택) → 어링얼창','COFFEE HOLIC 휴식 가능'],['15:00','호텔 휴식','8월 충칭 공식 일정 취급'],['17:00','십팔제','체력 부족하면 山城巷과 택1'],['18:30~','샤하오리 → 룽먼하오','해질 무렵 · 悟饮门 카페 선택'],['21:00~','마라롱샤 / 남빈루 야시장','저녁 2차전']]},
+{date:'08.29',dow:'SAT',title:'HOMEBOUND',place:'CHONGQING → JINAN → INCHEON',tone:'red',events:[
+['08:30','샤오몐 아침','重庆小面'],['10:00','공항 이동','13:30 CKG 출발'],['15:45','지난 도착','시내 대신 공항 환승'],['16:20~','산둥 음식 + 카페','把子肉 있으면 도전 → 국제선 출국'],['20:10','지난 → 인천','22:40 도착']]}
+];
 const places=[
 ['해방비','解放碑','8/25'],['홍야동','洪崖洞','8/25'],['魁星楼','魁星楼','8/25'],['戴家巷','戴家巷','8/25'],
 ['대한민국 임시정부 청사','重庆大韩民国临时政府旧址陈列馆','8/26'],['천생삼교','天生三桥','8/26'],
 ['선녀산','仙女山国家森林公园','8/27'],['용수협지봉','龙水峡地缝','8/27'],['관음교','观音桥步行街','8/27'],['북창','北仓文创街区','8/27'],['구가','九街','8/27'],
 ['나한사','罗汉寺','8/28'],['자기구고진','磁器口古镇','8/28'],['리즈바역','李子坝','8/28'],['어링공원','鹅岭公园','8/28 선택'],['어링얼창','鹅岭二厂','8/28'],['십팔제','十八梯','8/28'],['샤하오리','下浩里','8/28'],['룽먼하오','龙门浩老街','8/28']];
 const foods=[
-['밀크티','奶茶','8/25·27'],['우롱 양고기','碗碗羊肉 / 羊肉汤锅','8/26'],['카오위','烤鱼','8/27'],['딤섬','港式点心','8/28 전후'],['샤오몐','重庆小面','8/29'],['마라롱샤','麻辣小龙虾','8/28'],['천마화','陈麻花','자기구'],['화자오 라테','花椒拿铁','샤하오리 선택']];
+['밀크티','奶茶','8/25 · 27'],['우롱 양고기','碗碗羊肉 / 羊肉汤锅','8/26'],['카오위','烤鱼','8/27'],['딤섬','港式点心','8/28 전후'],['샤오몐','重庆小面','8/29'],['마라롱샤','麻辣小龙虾','8/28'],['천마화','陈麻花','자기구'],['화자오 라테','花椒拿铁','샤하오리 선택']];
 const phrases=[
 ['한국 여권으로 숙박 가능한가요?','韩国护照可以入住吗？'],['외국인 숙박등록 가능한가요?','可以办理外国人住宿登记吗？'],['이곳으로 가주세요.','请带我去这里。'],['덜 맵게 해주세요.','请少辣一点。'],['마라맛과 마늘맛 반반 가능한가요?','麻辣和蒜蓉可以各来一半吗？'],['설탕 30%, 얼음 적게요.','三分糖，少冰。'],['고속철역은 우롱남역 맞나요?','是武隆南站吗？'],['이 이름을 고덕지도에서 검색해주세요.','请在高德地图搜索这个名字。']];
 const checks=[
 '여권 유효기간 확인','Alipay 해외카드 등록·본인인증','WeChat 결제수단 준비','12306 로그인 및 실명인증','重庆东 ↔ 武隆南 왕복 고속철 예약','우롱 숙소 위치 확정','Fandiao Apartment 외국인 숙박등록 가능 여부 확인','천생삼교·용수협지봉·선녀산 입장권 확인','첫 숙소 중국어 주소·전화번호 캡처','두 번째 숙소 중국어 주소·전화번호 캡처','고덕지도에 주요 장소 즐겨찾기','보조배터리·우산·우비·운동화 준비','현금 300~500위안 비상용 준비','칭다오·지난 환승 동선과 탑승권 발급 방식 확인'];
 
-const key='cqTripAppV1';
-let state=JSON.parse(localStorage.getItem(key)||'{}');
+const key='cqTripAppV2';
+let state=JSON.parse(localStorage.getItem(key)||localStorage.getItem('cqTripAppV1')||'{}');
+const $=id=>document.getElementById(id);
 function save(){localStorage.setItem(key,JSON.stringify(state));}
-function copyText(t){navigator.clipboard?.writeText(t); const old=document.title; document.title='복사됨 ✓'; setTimeout(()=>document.title=old,700)}
-function renderPlaces(){placeGrid.innerHTML=places.map((p,i)=>`<div class="mini"><b>${p[0]}</b><div class="cn">${p[1]}</div><div class="muted">${p[2]}</div><div class="actions"><button class="btn secondary" onclick="copyText('${p[1].replaceAll("'","\\'")}')">중국어명 복사</button></div></div>`).join('')}
-function renderFoods(){foodGrid.innerHTML=foods.map((f,i)=>{const id='food'+i; const done=!!state[id]; return `<label class="mini ${done?'done':''}" id="wrap-${id}"><input type="checkbox" ${done?'checked':''} onchange="toggle('${id}',this.checked)"> <b style="display:inline">${f[0]}</b><div class="cn">${f[1]}</div><div class="muted">${f[2]}</div></label>`}).join('')}
-function renderPhrases(){phraseList.innerHTML=phrases.map(p=>`<div class="phrase"><div><div class="ko">${p[0]}</div><div class="zh">${p[1]}</div></div><button class="btn secondary" onclick="copyText('${p[1].replaceAll("'","\\'")}')">복사</button></div>`).join('')}
-function renderChecks(){checkList.innerHTML=checks.map((c,i)=>{const id='check'+i; const done=!!state[id]; return `<label class="check ${done?'done':''}" id="wrap-${id}"><input type="checkbox" ${done?'checked':''} onchange="toggle('${id}',this.checked)"><span>${c}</span></label>`}).join('')}
+function toast(msg='COPIED ✓'){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove('show'),900)}
+async function copyText(t){try{await navigator.clipboard.writeText(t);toast()}catch(e){toast('LONG PRESS TO COPY')}}
+function safe(s){return s.replaceAll('\\','\\\\').replaceAll("'","\\'")}
+
+function renderDayTabs(){
+  $('dayTabs').innerHTML=`<button class="day-chip active" data-day="all">ALL DAYS</button>`+days.map((d,i)=>`<button class="day-chip" data-day="${i}">${d.date}</button>`).join('');
+  document.querySelectorAll('.day-chip').forEach(b=>b.onclick=()=>{document.querySelectorAll('.day-chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderSchedule(b.dataset.day)});
+}
+function renderSchedule(filter='all'){
+  const list=filter==='all'?days:days.filter((_,i)=>String(i)===String(filter));
+  $('scheduleList').innerHTML=list.map((d,idx)=>{const real=filter==='all'?idx:Number(filter);return `<article class="day-card" data-tone="${d.tone}"><div class="day-cover"><div><div class="day-index">DAY ${String(real+1).padStart(2,'0')} · ${d.dow}</div><div class="day-name">${d.title}</div><div class="day-place">${d.place}</div></div><div class="day-num">${d.date.slice(3)}</div></div><div class="events">${d.events.map(e=>`<div class="event"><div class="event-time">${e[0]}</div><div><div class="event-title">${e[1]}</div><div class="event-sub">${e[2]}</div></div><div class="event-dot"></div></div>`).join('')}</div></article>`}).join('');
+}
+function renderPlaces(){$('placeGrid').innerHTML=places.map(p=>`<article class="tile"><div><div class="date">${p[2]}</div><b>${p[0]}</b><div class="cn">${p[1]}</div></div><div class="tile-actions"><button class="round-btn" aria-label="중국어명 복사" onclick="copyText('${safe(p[1])}')">↗</button></div></article>`).join('')}
+function renderFoods(){$('foodGrid').innerHTML=foods.map((f,i)=>{const id='food'+i,done=!!state[id];return `<label class="food-card ${done?'done':''}" id="wrap-${id}"><input type="checkbox" ${done?'checked':''} onchange="toggle('${id}',this.checked)"><div class="food-top"><div class="food-when">${f[2]}</div><div class="food-check"></div></div><div class="food-name">${f[0]}</div><div class="food-cn">${f[1]}</div></label>`}).join('')}
+function renderPhrases(){$('phraseList').innerHTML=phrases.map(p=>`<div class="phrase-card"><div><div class="ko">${p[0]}</div><div class="zh">${p[1]}</div></div><button class="copy" onclick="copyText('${safe(p[1])}')">COPY</button></div>`).join('')}
+function renderChecks(){$('checkList').innerHTML=checks.map((c,i)=>{const id='check'+i,done=!!state[id];return `<label class="check-row ${done?'done':''}" id="wrap-${id}"><input type="checkbox" ${done?'checked':''} onchange="toggle('${id}',this.checked)"><span>${c}</span></label>`}).join('')}
 window.toggle=(id,v)=>{state[id]=v;save();document.getElementById('wrap-'+id)?.classList.toggle('done',v)};
 
-document.querySelectorAll('.nav').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(b.dataset.target).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}));
+function showSection(target){document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.target===target));document.querySelectorAll('.section').forEach(s=>s.classList.toggle('active',s.id===target));window.scrollTo({top:0,behavior:'smooth'});state.lastTab=target;save()}
+document.querySelectorAll('.nav').forEach(b=>b.addEventListener('click',()=>showSection(b.dataset.target)));
 
-function updateBudget(){const pp=Number(ppBudget.value||0), shop=Number(shopBudget.value||0); totalBudget.textContent=((pp+shop)*2).toLocaleString()+' CNY'; state.ppBudget=pp;state.shopBudget=shop;save()}
-ppBudget.value=state.ppBudget??1800; shopBudget.value=state.shopBudget??250; ppBudget.oninput=updateBudget;shopBudget.oninput=updateBudget; updateBudget();
-expenseNotes.value=state.expenseNotes||''; expenseNotes.oninput=()=>{state.expenseNotes=expenseNotes.value;save()};
-freeNotes.value=state.freeNotes||''; freeNotes.oninput=()=>{state.freeNotes=freeNotes.value;save()};
-resetBtn.onclick=()=>{if(confirm('체크 상태와 메모를 초기화할까요?')){localStorage.removeItem(key);location.reload()}};
+function updateBudget(){const pp=Number($('ppBudget').value||0),shop=Number($('shopBudget').value||0),total=(pp+shop)*2;$('totalBudget').innerHTML=`${total.toLocaleString()} <small>CNY</small>`;state.ppBudget=pp;state.shopBudget=shop;save()}
+$('ppBudget').value=state.ppBudget??1800;$('shopBudget').value=state.shopBudget??250;$('ppBudget').oninput=updateBudget;$('shopBudget').oninput=updateBudget;updateBudget();
+$('expenseNotes').value=state.expenseNotes||'';$('expenseNotes').oninput=()=>{state.expenseNotes=$('expenseNotes').value;save()};
+$('freeNotes').value=state.freeNotes||'';$('freeNotes').oninput=()=>{state.freeNotes=$('freeNotes').value;save()};
+$('resetBtn').onclick=()=>{if(confirm('체크 상태와 메모를 초기화할까요?')){localStorage.removeItem(key);location.reload()}};
 
-let deferredPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;installBtn.hidden=false});installBtn.onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.hidden=true};
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
-renderPlaces();renderFoods();renderPhrases();renderChecks();
+let deferredPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installBtn').hidden=false});$('installBtn').onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;$('installBtn').hidden=true};
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').then(r=>r.update()).catch(()=>{}))}
+
+renderDayTabs();renderSchedule();renderPlaces();renderFoods();renderPhrases();renderChecks();
+if(state.lastTab && document.getElementById(state.lastTab)) showSection(state.lastTab);
 </script>
 </body>
 </html>
